@@ -82,7 +82,7 @@
         <div class="row">
             <div class="col-md-2">
                 <ul class="list-group custom-card">
-                    <li class="list-group-item"><a href="{{ route('home') }}" style="color: black; text-decoration: none;">Home</a></li>
+                <li class="list-group-item"><a href="{{ route('home') }}" style="color: black; text-decoration: none;">Home</a></li>
                     <li class="list-group-item">Jadwal</li>
                     <li class="list-group-item active" aria-current="true">Artikel</li>
                     <li class="list-group-item"><a href="{{ route('faq.index') }}" style="color: black; text-decoration: none;">FAQ</a></li>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Artikel | BOOSTERLAB</title>
+    <title>FAQ | BOOSTERLAB</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -78,56 +78,54 @@
             </div>
         </nav>
     </div>
-    <div class="container mt-5">
+    <div class="container mt-4">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 mb-3">
                 <ul class="list-group custom-card">
                     <li class="list-group-item"><a href="{{ route('home') }}" style="color: black; text-decoration: none;">Home</a></li>
                     <li class="list-group-item">Jadwal</li>
-                    <li class="list-group-item active" aria-current="true">Artikel</li>
-                    <li class="list-group-item"><a href="{{ route('faq.index') }}" style="color: black; text-decoration: none;">FAQ</a></li>
+                    <li class="list-group-item">Artikel</li>
+                    <li class="list-group-item active" aria-current="true">FAQ</li>
                 </ul>
             </div>
             <div class="col-md-10">
-                <div class="card border-0 shadow custom-card">
-                    <div class="card-body">
-                        <a href="{{ route('artikel.create') }}" class="btn btn-md btn-success mb-3">Buat Artikel</a>
-                        <table class="table table-bordered">
-                            <thead>
-                              <tr>
-                                <th scope="col">GAMBAR</th>
-                                <th scope="col">JUDUL</th>
-                                <th scope="col">DESKRIPSI</th>
-                                <th scope="col"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              @forelse ($artikels as $artikel)
-                                <tr>
-                                    <td class="text-center">
-                                        <img src="{{ Storage::url('public/artikels/').$artikel->image }}" class="rounded" style="width: 20rem">
-                                    </td>
-                                    <td>{{ $artikel->title }}</td>
-                                    <td>{!! $artikel->content !!}</td>
-                                    <td class="text-center">
-                                        <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('artikel.destroy', $artikel->id) }}" method="POST">
-                                            <a href="{{ route('artikel.show', $artikel->id) }}" class="btn btn-sm btn-dark">SHOW</a>
-                                            <a href="{{ route('artikel.edit', $artikel->id) }}" class="btn btn-sm btn-primary">EDIT</a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                              @empty
-                                  <div class="alert alert-danger">
-                                      Artikel belum tersedia.
-                                  </div>
-                              @endforelse
-                            </tbody>
-                          </table>  
-                          {{ $artikels->links() }}
+                <div class="accordion" id="accordionPanelsStayOpen">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        <strong>Apa itu Kartu Menuju Sehat (KMS) Online?</strong>
+                    </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                    Kartu Menuju Sehat (KMS) adalah program pemerintah yang bertujuan untuk memantau pertumbuhan dan kesehatan anak secara teratur, termasuk bagi ibu hamil dan menyusui. Program KMS menyediakan jadwal pemeriksaan kesehatan yang teratur dan memberikan informasi serta edukasi tentang kesehatan anak. Untuk mendaftar KMS, orang tua dapat mengunjungi puskesmas terdekat dan melengkapi persyaratan yang dibutuhkan, atau dapat menggunakan layanan KMS online yang disediakan oleh pemerintah.
                     </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                    <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        <strong>Bagaimana Cara Penggunaannya?</strong>
+                    </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+                    <div class="accordion-body">
+                    Cukup mudah, masukkan nama anak, jenis kelamin, tanggal lahir, berat badan (kg) serta tinggi badan (cm) anak di dalam formulir KMS Online kemudian klik Lihat Hasil. Pengukuran tinggi untuk anak umur 0-24 bulan diukur dalam posisi telentang, sedangkan anak umur 24-60 bulan diukur dalam posisi berdiri.
+                    </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                    <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                        <strong>Apakah Hasil dari KMS Online Akurat?</strong>
+                    </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+                    <div class="accordion-body">
+                    Hasil dari KMS Online mengacu pada data yang digunakan, yaitu data PMK No 2 Th 2020 Tentang Standar Antropometri Anak, PMK No 66 Tentang Pemantauan Tumbuh Kembang Anak dan juga PMK No 12 Tentang Penyelenggaraan Imunisasi, yang diolah untuk memudahkan dalam membaca pertumbuhan/perkembangan anak dengan memasukkan parameter, umur, jenis kelamin, berat dan tinggi badan anak. Kami mengusahakan agar data yang dihasilkan KMS Online sesuai dengan rumus tabel pertumbuhan dan perkembangan, bahkan ketika dicek secara manual.
+                    </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -136,17 +134,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script>
-        //message with toastr
-        @if(session()->has('success'))
-        
-            toastr.success('{{ session('success') }}', 'BERHASIL!'); 
-
-        @elseif(session()->has('error'))
-
-            toastr.error('{{ session('error') }}', 'GAGAL!'); 
-            
-        @endif
-    </script>
 </body>
 </html>

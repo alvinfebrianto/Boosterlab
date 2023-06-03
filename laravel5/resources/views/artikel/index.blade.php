@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Artikel | BOOSTERLAB</title>
+    <title>Artikel | Boosterlab</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -26,7 +26,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/admin') }}">
                     {{ config('app.name', 'Boosterlab') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -78,14 +78,14 @@
             </div>
         </nav>
     </div>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-2">
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-2 mb-3">
                 <ul class="list-group custom-card">
-                    <li class="list-group-item"><a href="{{ route('home') }}" style="color: black; text-decoration: none;">Home</a></li>
+                    <li class="list-group-item"><a href="{{ route('admin.home') }}" style="color: black; text-decoration: none;">Home</a></li>
                     <li class="list-group-item">Jadwal</li>
                     <li class="list-group-item active" aria-current="true">Artikel</li>
-                    <li class="list-group-item"><a href="{{ route('faq.index') }}" style="color: black; text-decoration: none;">FAQ</a></li>
+                    <li class="list-group-item">FAQ</li>
                 </ul>
             </div>
             <div class="col-md-10">
@@ -136,6 +136,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script>
         //message with toastr
         @if(session()->has('success'))
@@ -148,5 +149,6 @@
             
         @endif
     </script>
+
 </body>
 </html>
