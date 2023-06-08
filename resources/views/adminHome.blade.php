@@ -29,7 +29,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/admin') }}">
-                    <img src="{{ asset('img/boosterlab_logo.svg') }}" alt="Boosterlab Logo" style="max-width: 25%;">
+                    <img src="{{ asset('img/boosterlab_logo.svg') }}" alt="Boosterlab Logo" width="170" class="d-inline-block align-text-top">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -61,7 +61,7 @@
                                     <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <strong>{{ __('Logout') }}</strong>
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -73,7 +73,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container mt-3">
+        <div class="container mt-3 mb-3">
             <div class="row justify-content-center">
                 <div class="col-md-2 mb-3">
                     <ul class="list-group custom-card">
