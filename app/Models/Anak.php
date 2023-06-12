@@ -9,32 +9,16 @@ class Anak extends Model
 {
     use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
+    // Nama tabel yang digunakan
     protected $table = 'anaks';
 
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
+    // Nama kolom sebagai primary key
     protected $primaryKey = 'nomor';
 
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
+    // Menyatakan primary key bertipe incrementing
     public $incrementing = true;
 
-    /**
-     * fillable
-     *
-     * @var array
-     */
+    // Daftar atribut yang dapat diisi (fillable) pada model ini
     protected $fillable = [
         'nama', 'gender', 'tanggal_lahir', 'umur', 'berat_lahir', 'tinggi_lahir'
     ];

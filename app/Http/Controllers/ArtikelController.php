@@ -10,7 +10,7 @@ use Illuminate\View\View;
 class ArtikelController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Membuat instance controller baru
      *
      * @return void
      */
@@ -20,7 +20,7 @@ class ArtikelController extends Controller
     }
 
     /**
-     * index
+     * Menampilkan halaman index artikel dengan daftar artikel
      *
      * @return void
      */
@@ -31,7 +31,7 @@ class ArtikelController extends Controller
     }
 
     /**
-    * create
+    * Menampilkan halaman tambah artikel
     *
     * @return void
     */
@@ -42,7 +42,7 @@ class ArtikelController extends Controller
 
 
     /**
-    * store
+    * Menyimpan data artikel baru
     *
     * @param  mixed $request
     * @return void
@@ -55,7 +55,7 @@ class ArtikelController extends Controller
             'content'   => 'required'
         ]);
 
-        //upload image
+        // Upload gambar
         $image = $request->file('image');
         $image->storeAs('public/artikels', $image->hashName());
 
@@ -66,16 +66,16 @@ class ArtikelController extends Controller
         ]);
 
         if($artikel){
-            //redirect dengan pesan sukses
+            // Redirect dengan pesan sukses
             return redirect()->route('artikel.index')->with(['success' => 'Artikel Berhasil Disimpan!']);
         }else{
-            //redirect dengan pesan error
+            // Redirect dengan pesan error
             return redirect()->route('artikel.index')->with(['error' => 'Artikel Gagal Disimpan!']);
         }
     }
 
     /**
-     * show
+     * Menampilkan halaman detail artikel
      *
      * @param  mixed $id
      * @return View
@@ -87,7 +87,7 @@ class ArtikelController extends Controller
     }
 
     /**
-    * edit
+    * Menampilkan halaman edit artikel
     *
     * @param  mixed $artikel
     * @return void
@@ -98,7 +98,7 @@ class ArtikelController extends Controller
     }
 
     /**
-    * update
+    * Memperbarui data artikel yang ada
     *
     * @param  mixed $request
     * @param  mixed $artikel
@@ -111,7 +111,7 @@ class ArtikelController extends Controller
             'content'   => 'required'
         ]);
 
-        //get data Artikel by ID
+        // Mendapatkan data artikel melalui ID
         $artikel = Artikel::findOrFail($artikel->id);
 
         if($request->file('image') == "") {
@@ -123,10 +123,10 @@ class ArtikelController extends Controller
 
         } else {
 
-            //hapus old image
+            // Hapus gambar lama
             Storage::disk('local')->delete('public/artikels/'.$artikel->image);
 
-            //upload new image
+            // Upload gambar baru
             $image = $request->file('image');
             $image->storeAs('public/artikels', $image->hashName());
 
@@ -139,16 +139,16 @@ class ArtikelController extends Controller
         }
 
         if($artikel){
-            //redirect dengan pesan sukses
+            // Redirect dengan pesan sukses
             return redirect()->route('artikel.index')->with(['success' => 'Artikel Berhasil Diperbarui!']);
         }else{
-            //redirect dengan pesan error
+            // Redirect dengan pesan error
             return redirect()->route('artikel.index')->with(['error' => 'Artikel Gagal Diperbarui!']);
         }
     }
 
     /**
-    * destroy
+    * Menghapus data artikel
     *
     * @param  mixed $id
     * @return void
@@ -160,10 +160,10 @@ class ArtikelController extends Controller
     $artikel->delete();
 
     if($artikel){
-        //redirect dengan pesan sukses
+        // Redirect dengan pesan sukses
         return redirect()->route('artikel.index')->with(['success' => 'Artikel Berhasil Dihapus!']);
     }else{
-        //redirect dengan pesan error
+        // Redirect dengan pesan error
         return redirect()->route('artikel.index')->with(['error' => 'Artikel Gagal Dihapus!']);
     }
     }

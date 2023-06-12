@@ -11,11 +11,21 @@ class FaqController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Menampilkan halaman FAQ
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         return view('faq');
     }
 
+    /**
+     * Menampilkan halaman FAQ untuk admin
+     *
+     * @return \Illuminate\View\View
+     */
     public function adminFAQ()
     {
         return view('admin.faq');

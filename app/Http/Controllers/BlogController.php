@@ -14,12 +14,23 @@ class BlogController extends Controller
         $this->middleware('auth');
     }
 
+     /**
+     * Menampilkan halaman blog dengan daftar artikel
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $artikels = Artikel::latest()->paginate(10);
         return view('blog.index', compact('artikels'));
     }
 
+    /**
+     * Menampilkan halaman detail artikel
+     *
+     * @param  string $id
+     * @return \Illuminate\View\View
+     */
     public function show(string $id): View
     {
         $artikel = Artikel::findOrFail($id);

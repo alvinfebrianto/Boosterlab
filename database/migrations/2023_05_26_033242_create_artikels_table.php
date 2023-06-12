@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateArtikelsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Jalankan migrasi.
      *
      * @return void
      */
@@ -23,7 +23,7 @@ class CreateArtikelsTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Batalkan migrasi.
      *
      * @return void
      */

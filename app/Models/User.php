@@ -11,29 +11,17 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    // Daftar atribut yang dapat diisi (fillable) pada model ini
     protected $fillable = [
         'name', 'email', 'password', 'is_admin',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    // Atribut yang disembunyikan ketika objek model diubah menjadi array
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+    // Atribut yang diubah menjadi tipe data asli (native types)
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

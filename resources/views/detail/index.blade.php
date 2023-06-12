@@ -1,23 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Boosterlab') }}</title>
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <title>Detail Anak | Boosterlab</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>.custom-card{border-radius:1em;}
-    </style>
+    <style>.custom-card{border-radius: 1em;}</style>
 </head>
 <body>
     <div id="app">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/admin') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('img/boosterlab_logo.svg') }}" alt="Boosterlab Logo" width="170" class="d-inline-block align-text-top">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -25,11 +24,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                    </ul>
+                    <ul class="navbar-nav me-auto"></ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -62,24 +59,42 @@
                 </div>
             </div>
         </nav>
-        <!-- Content -->
         <div class="container mt-3 mb-3">
             <div class="row justify-content-center">
-                <div class="col-md-2 mb-3">
-                    <!-- Sidebar -->
-                    <ul class="list-group custom-card">
-                        <li class="list-group-item active" aria-current="true">Home</li>
-                        <li class="list-group-item"><a href="{{ route('admin.jadwal') }}" style="color: black; text-decoration: none;">Jadwal</a></li>
-                        <li class="list-group-item"><a href="{{ route('artikel.index') }}" style="color: black; text-decoration: none;">Artikel</a></li>
-                        <li class="list-group-item"><a href="{{ route('admin.faq') }}" style="color: black; text-decoration: none;">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-10 mb-3">
-                    <!-- Main Card -->
-                    <div class="card custom-card">
-                        <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="col-md-12">
+                    <div class="card border-0 shadow custom-card">
                         <div class="card-body">
-                            Anda adalah {{ Auth::user()->name }}
+                            <!-- Tombol untuk menambahkan data -->
+                            <a href="{{ route('detail.create', $anak) }}" class="btn btn-md btn-success mb-3">Tambah Data</a>
+                            <!-- Tombol untuk melihat hasil -->
+                            <a href="{{ route('detail.hasil', $anak) }}" class="btn btn-md btn-warning mb-3">Hasil</a>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Bulan ke</th>
+                                            <th scope="col">Berat</th>
+                                            <th scope="col">Tinggi</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($detailanak as $detail)
+                                            <tr>
+                                                <td>{{ $detail->bulan }}</td>
+                                                <td>{{ rtrim(rtrim($detail->berat, '0'), '.') }} Kg</td>
+                                                <td>{{ rtrim(rtrim($detail->tinggi, '0'), '.') }} Cm</td>
+                                                <td class="text-center">
+                                                    <!-- Tombol untuk mengedit data -->
+                                                    <a href="/detail/{{ $detail->id}}/edit" class="btn btn-sm btn-primary mb-1">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

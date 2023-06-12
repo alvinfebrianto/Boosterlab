@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Boosterlab') }}</title>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -14,6 +15,7 @@
 </head>
 <body>
     <div id="app">
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -24,8 +26,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                    </ul>
+                    <ul class="navbar-nav me-auto"></ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -61,17 +62,20 @@
                 </div>
             </div>
         </nav>
+        <!-- Content -->
         <div class="container mt-3 mb-3">
             <div class="row justify-content-center">
                 <div class="col-md-2 mb-3">
+                    <!-- Sidebar -->
                     <ul class="list-group custom-card">
                         <li class="list-group-item active" aria-current="true">Home</li>
-                        <li class="list-group-item">Jadwal</li>
+                        <li class="list-group-item"><a href="{{ route('jadwal') }}" style="color: black; text-decoration: none;">Jadwal</a></li>
                         <li class="list-group-item"><a href="{{ route('blog.index') }}" style="color: black; text-decoration: none;">Artikel</a></li>
                         <li class="list-group-item"><a href="{{ route('faq') }}" style="color: black; text-decoration: none;">FAQ</a></li>
                     </ul>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-10 mb-3">
+                    <!-- Main Card -->
                     <div class="card border-0 shadow custom-card">
                         <div class="card-body">
                             <a href="{{ route('anak.create') }}" class="btn btn-md btn-success mb-3">Tambah Data Anak</a>
@@ -88,6 +92,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!-- Mengurutkan koleksi anak-anak berdasarkan umur -->
                                         @php
                                             $sortedAnaks = $anaks->sortBy('umur');
                                             $counter = 1;
@@ -100,29 +105,17 @@
                                                 <td>{{ $anak->gender }}</td>
                                                 <td>{{ $anak->tanggal_lahir }}</td>
                                                 <td>
+                                                    <!-- Menghitung umur anak dalam bulan -->
                                                     @php
-                                                        $umurArray = explode(' ', $anak->umur);
-                                                        $tahun = 0;
-                                                        $bulan = 0;
-                                                        $hari = 0;
-                                                        if (count($umurArray) > 1) {
-                                                            if ($umurArray[1] === 'tahun') {
-                                                                $tahun = (int)$umurArray[0];
-                                                                $bulan = (int)$umurArray[2];
-                                                                $hari = (int)$umurArray[4];
-                                                            } elseif ($umurArray[1] === 'bulan') {
-                                                                $bulan = (int)$umurArray[0];
-                                                                $hari = (int)$umurArray[2];
-                                                            } elseif ($umurArray[1] === 'hari') {
-                                                                $hari = (int)$umurArray[0];
-                                                            }
-                                                        }
-                                                        echo $bulan . ' bulan';
+                                                        $tanggalLahir = \Carbon\Carbon::parse($anak->tanggal_lahir);
+                                                        $umur = $tanggalLahir->diff(\Carbon\Carbon::now());
+                                                        $umurBulan = ($umur->format('%y') * 12) + $umur->format('%m');
+                                                        echo $umurBulan . ' bulan';
                                                     @endphp
                                                 </td>
                                                 <td class="text-center">
                                                     <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('anak.destroy', $anak->nomor) }}" method="POST">
-                                                        <a href="{{ route('anak.show', $anak->nomor) }}" class="btn btn-sm btn-dark mb-1">
+                                                        <a href="{{ route('detail.index', $anak->nomor) }}" class="btn btn-sm btn-dark mb-1">
                                                             <i class="bi bi-eye"></i>
                                                         </a>
                                                         <a href="{{ route('anak.edit', $anak->nomor) }}" class="btn btn-sm btn-primary mb-1">
@@ -130,6 +123,7 @@
                                                         </a>
                                                         @csrf
                                                         @method('DELETE')
+                                                        <!-- Tombol Hapus -->
                                                         <button type="submit" class="btn btn-sm btn-danger mb-1">
                                                             <i class="bi bi-trash"></i>
                                                         </button>
@@ -140,7 +134,7 @@
                                             <tr>
                                                 <td colspan="7">
                                                     <div class="alert alert-danger">
-                                                        Anak belum tersedia.
+                                                        Data Anak Masih Kosong.
                                                     </div>
                                                 </td>
                                             </tr>
@@ -155,6 +149,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

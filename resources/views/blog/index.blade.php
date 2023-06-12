@@ -7,11 +7,13 @@
     <title>Blog | Boosterlab</title>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>.custom-card{border-radius: 1em;}</style>
+    <style>.custom-card{border-radius: 1em;}.text-truncate-container a{overflow:hidden;-webkit-line-clamp:3;-webkit-box-orient:vertical;display:-webkit-box;}.description-content{overflow:hidden;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:5;-webkit-box-orient:vertical;display:-webkit-box;}</style>
 </head>
 <body>
     <div id="app">
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -63,8 +65,9 @@
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3">
                 <ul class="list-group custom-card">
+                    <!-- Sidebar -->
                     <li class="list-group-item"><a href="{{ route('home') }}" style="color: black; text-decoration: none;">Home</a></li>
-                    <li class="list-group-item">Jadwal</li>
+                    <li class="list-group-item"><a href="{{ route('jadwal') }}" style="color: black; text-decoration: none;">Jadwal</a></li>
                     <li class="list-group-item active" aria-current="true">Artikel</li>
                     <li class="list-group-item"><a href="{{ route('faq') }}" style="color: black; text-decoration: none;">FAQ</a></li>
                 </ul>
@@ -72,32 +75,33 @@
             <div class="col-md-10">
                 <div class="card border-0 shadow custom-card">
                     <div class="card-body">
-                        <table class="table table-borderless">
-                            <tbody>
-                              @forelse ($artikels as $artikel)
-                              <tr>
-                                <td class="text-center">
-                                    <img src="{{ Storage::url('public/artikels/').$artikel->image }}" class="rounded" style="width: 20rem">
-                                </td>
-                                <td colspan="2">
-                                    <a href="{{ route('artikel.show', $artikel->id) }}" class="h5">{{ $artikel->title }}</a>
-                                    <br>
-                                    {!! $artikel->content !!}
-                                </td>
-                              </tr>
-                              @empty
-                                  <div class="alert alert-danger">
-                                      Artikel belum tersedia.
-                                  </div>
-                              @endforelse
-                            </tbody>
-                          </table>
-                          {{ $artikels->links() }}
+                        <div class="table table-borderless">
+                            @forelse ($artikels as $artikel)
+                                <div class="row mb-3">
+                                    <div class="col-md-5">
+                                        <!-- Menampilkan gambar artikel -->
+                                        <img src="{{ Storage::url('public/artikels/').$artikel->image }}" class="rounded" style="width: 23rem">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="text-truncate-container">
+                                            <!-- Link untuk menuju halaman detail artikel -->
+                                            <a href="{{ route('artikel.show', $artikel->id) }}" class="h5">{{ $artikel->title }}</a>
+                                            <br>
+                                            <div class="description-content">{!! $artikel->content !!}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="alert alert-danger">
+                                    Artikel belum tersedia.
+                                </div>
+                            @endforelse
+                        </div>
+                        {{ $artikels->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateAnaksTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Jalankan migrasi.
      *
      * @return void
      */
@@ -26,7 +26,7 @@ class CreateAnaksTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Batalkan migrasi.
      *
      * @return void
      */

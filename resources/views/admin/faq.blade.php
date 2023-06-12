@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>FAQ | Boosterlab</title>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -12,6 +13,7 @@
 </head>
 <body>
     <div id="app">
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/admin') }}">
@@ -59,58 +61,69 @@
             </div>
         </nav>
     </div>
+    <!-- Content -->
     <div class="container mt-3 mb-3">
         <div class="row">
             <div class="col-md-2 mb-3">
+                <!-- Sidebar -->
                 <ul class="list-group custom-card">
                     <li class="list-group-item"><a href="{{ route('admin.home') }}" style="color: black; text-decoration: none;">Home</a></li>
-                    <li class="list-group-item">Jadwal</li>
+                    <li class="list-group-item"><a href="{{ route('admin.jadwal') }}" style="color: black; text-decoration: none;">Jadwal</a></li>
                     <li class="list-group-item"><a href="{{ route('artikel.index') }}" style="color: black; text-decoration: none;">Artikel</a></li>
                     <li class="list-group-item active" aria-current="true">FAQ</li>
                 </ul>
             </div>
             <div class="col-md-10">
+                <!-- Akordion -->
                 <div class="accordion" id="accordionPanelsStayOpen">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                        <strong>Apa itu Boosterlab?</strong>
-                    </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body">
-                    Boosterlab merupakan sebuah program Dinas Kesehatan Daerah Kabupaten Tulungagung yang bertujuan untuk memfasilitasi masyarakatnya dalam imunisasi agar lebih mudah dan efisien. Website Boosterlab menyediakan berbagai fitur yang dapat diakses seperti pemantauan pertumbuhan dan kesehatan anak.
+                    <!-- Panel Pertama -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <!-- Tombol Akordion Pertama -->
+                            <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong>Apa itu Boosterlab?</strong>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <!-- Konten Akordion Pertama -->
+                                Boosterlab merupakan sebuah program Dinas Kesehatan Daerah Kabupaten Tulungagung yang bertujuan untuk memfasilitasi masyarakatnya dalam imunisasi agar lebih mudah dan efisien. Website Boosterlab menyediakan berbagai fitur yang dapat diakses seperti pemantauan pertumbuhan dan kesehatan anak.
+                            </div>
+                        </div>
                     </div>
+                    <!-- Panel Kedua -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                            <!-- Tombol Akordion Kedua -->
+                            <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                <strong>Bagaimana Cara Penggunaannya?</strong>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+                            <div class="accordion-body">
+                                <!-- Konten Akordion Kedua -->
+                                Boosterlab dirancang untuk mempermudah masyarakat dalam menggunakannya. Pengguna hanya perlu membuat akun dan melakukan login agar dapat mengakses semua fitur pada website.
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                        <strong>Bagaimana Cara Penggunaannya?</strong>
-                    </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
-                    <div class="accordion-body">
-                    Boosterlab dirancang untuk mempermudah masyarakat dalam menggunakannya. Pengguna hanya perlu membuat akun dan melakukan login agar dapat mengakses semua fitur pada website.
+                    <!-- Panel Ketiga -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                            <!-- Tombol Akordion Ketiga -->
+                            <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                <strong>Apakah Hasil dari Boosterlab Akurat?</strong>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+                            <div class="accordion-body">
+                                <!-- Konten Akordion Ketiga -->
+                                Hasil dari website Boosterlab mengacu pada data yang digunakan, yaitu data PMK No 2 Th 2020 Tentang Standar Antropometri Anak, PMK No 66 Tentang Pemantauan Tumbuh Kembang Anak dan juga PMK No 12 Tentang Penyelenggaraan Imunisasi, yang diolah untuk memudahkan dalam membaca pertumbuhan atau perkembangan anak dengan memasukkan parameter umur, jenis kelamin, berat dan tinggi badan anak. Boosterlab ini juga dipantau langsung oleh Dinas Kesehatan Daerah Kabupaten Tulungagung sehingga akurat dan terpercaya.
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                    <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                        <strong>Apakah Hasil dari Boosterlab Akurat?</strong>
-                    </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
-                    <div class="accordion-body">
-                    Hasil dari website Boosterlab mengacu pada data yang digunakan, yaitu data PMK No 2 Th 2020 Tentang Standar Antropometri Anak, PMK No 66 Tentang Pemantauan Tumbuh Kembang Anak dan juga PMK No 12 Tentang Penyelenggaraan Imunisasi, yang diolah untuk memudahkan dalam membaca pertumbuhan atau perkembangan anak dengan memasukkan parameter umur, jenis kelamin, berat dan tinggi badan anak. Boosterlab ini juga dipantau langsung oleh Dinas Kesehatan Daerah Kabupaten Tulungagung sehingga akurat dan terpercaya.
-                    </div>
-                    </div>
-                </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

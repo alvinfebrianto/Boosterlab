@@ -9,44 +9,25 @@ use Illuminate\View\View;
 
 class AnakController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * index
-     *
-     * @return void
-     */
+    // Menampilkan halaman index anak dengan daftar data anak
     public function index()
     {
         $anaks = Anak::latest()->paginate(10);
         return view('home', compact('anaks'));
     }
 
-
-    /**
-    * create
-    *
-    * @return void
-    */
+    // Menampilkan halaman tambah data anak
     public function create()
     {
         return view('anak.create');
     }
 
-    /**
-    * store
-    *
-    * @param  mixed $request
-    * @return void
-    */
+    // Menyimpan data anak baru
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -56,10 +37,8 @@ class AnakController extends Controller
             'berat_lahir'   => 'required|numeric',
             'tinggi_lahir'  => 'required|numeric',
         ]);
-
-        $tanggalLahir = $request->tanggal_lahir;
-        $umur = Carbon::parse($tanggalLahir)->diff(Carbon::now())->format('%y tahun %m bulan %d hari');
-
+        $tanggalLahir = Carbon::parse($request->tanggal_lahir);
+        $umur = $tanggalLahir->diff(Carbon::now())->format('%y tahun %m bulan %d hari');
         $anak = Anak::create([
             'nama'          => $request->nama,
             'gender'        => $request->gender,
@@ -68,121 +47,51 @@ class AnakController extends Controller
             'berat_lahir'   => $request->berat_lahir,
             'tinggi_lahir'  => $request->tinggi_lahir,
         ]);
-
-        // $tanggalLahir = $request->tanggal_lahir;
-        // $umur = Carbon::parse($tanggalLahir)->diffInYears(Carbon::now());
-
-        // $anak = Anak::create([
-        //     'nama'          => $request->nama,
-        //     'gender'        => $request->gender,
-        //     'tanggal_lahir' => $tanggalLahir,
-        //     'umur'          => $request->umur,
-        //     'berat_lahir'   => $request->berat_lahir,
-        //     'tinggi_lahir'  => $request->tinggi_lahir,
-        // ]);
-
         if ($anak) {
             return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Disimpan!']);
         } else {
             return redirect()->route('home')->with(['error' => 'Data Anak Gagal Disimpan!']);
         }
     }
-    
-    // public function store(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'nama'          => 'required',
-    //         'gender'        => 'required',
-    //         'tanggal_lahir' => 'required|date',
-    //         'umur'          => 'required|integer',
-    //         'berat_lahir'   => 'required|numeric',
-    //         'tinggi_lahir'  => 'required|numeric',
-    //     ]);
 
-    //     $anak = Anak::create([
-    //         'nama'          => $request->nama,
-    //         'gender'        => $request->gender,
-    //         'tanggal_lahir' => $request->tanggal_lahir,
-    //         'umur'          => $request->umur,
-    //         'berat_lahir'   => $request->berat_lahir,
-    //         'tinggi_lahir'  => $request->tinggi_lahir,
-    //     ]);
-
-    //     if ($anak) {
-    //         return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Disimpan!']);
-    //     } else {
-    //         return redirect()->route('home')->with(['error' => 'Data Anak Gagal Disimpan!']);
-    //     }
-    // }
-
-    /**
-     * show
-     *
-     * @param  mixed $nomor
-     * @return View
-     */
+    // Menampilkan halaman detail data anak
     public function show(string $nomor): View
     {
         $anak = Anak::findOrFail($nomor);
         return view('anak.show', compact('anak'));
     }
 
-    /**
-    * edit
-    *
-    * @param  mixed $anak
-    * @return void
-    */
+    // Menampilkan halaman edit data anak
     public function edit(Anak $anak)
     {
         return view('anak.edit', compact('anak'));
     }
 
-    /**
-    * update
-    *
-    * @param  mixed $request
-    * @param  mixed $artikel
-    * @return void
-    */
+    // Memperbarui data anak yang ada
     public function update(Request $request, $nomor)
     {
         $this->validate($request, [
             'nama'          => 'required',
             'gender'        => 'required',
             'tanggal_lahir' => 'required|date',
-            'umur'          => 'required|integer',
             'berat_lahir'   => 'required|numeric',
             'tinggi_lahir'  => 'required|numeric',
         ]);
-
+        $anakData = $request->only(['nama', 'gender', 'tanggal_lahir', 'berat_lahir', 'tinggi_lahir']);
+        $anakData['umur'] = Carbon::parse($request->tanggal_lahir)->diff(Carbon::now())->format('%y tahun %m bulan %d hari');
         $anak = Anak::findOrFail($nomor);
-
-        $anak->nama = $request->nama;
-        $anak->gender = $request->gender;
-        $anak->tanggal_lahir = $request->tanggal_lahir;
-        $anak->umur = $request->umur;
-        $anak->berat_lahir = $request->berat_lahir;
-        $anak->tinggi_lahir = $request->tinggi_lahir;
-
-        if ($anak) {
+        if ($anak->update($anakData)) {
             return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Diperbarui!']);
         } else {
             return redirect()->route('home')->with(['error' => 'Data Anak Gagal Diperbarui!']);
         }
     }
 
-    /**
-    * destroy
-    *
-    * @param  mixed $nomor
-    * @return void
-    */
+    // Menghapus data anak
     public function destroy($nomor)
     {
         $anak = Anak::findOrFail($nomor);
         $anak->delete();
-
         if ($anak) {
             return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Dihapus!']);
         } else {
