@@ -73,7 +73,7 @@
                 <div class="col-md-10 mb-3">
                     <div class="card shadow custom-card">
                         <div class="card-body">
-                            <h3 class="card-title text-center mb-4"><strong>Hasil Kartu Menuju Sehat</strong></h3>
+                            <h3 class="card-title text-center mb-4"><strong>Hasil Kartu Imunisasi Anak</strong></h3>
                             <h4 class="card-title"><strong>Profil</strong></h4>
                             <ul class="list-group">
                                 <li class="list-group-item" style="font-size: 16px;">Nama Anak: {{ $anak->nama }}</li>
