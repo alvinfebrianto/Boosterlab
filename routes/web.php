@@ -15,6 +15,7 @@ Auth::routes();
 
 // Route untuk halaman utama
 Route::get('/', [AnakController::class, 'index'])->name('home');
+Route::permanentRedirect('/home', '/');
 Route::get('/admin', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
 // Route untuk halaman anak
