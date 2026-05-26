@@ -61,7 +61,15 @@
         </nav>
         <div class="container mt-3 mb-3">
             <div class="row justify-content-center">
-                <div class="col-md-12">
+                <div class="col-md-2 mb-3">
+                    <ul class="list-group custom-card">
+                        <li class="list-group-item active" aria-current="true">Home</li>
+                        <li class="list-group-item"><a href="{{ route('jadwal') }}" style="color: black; text-decoration: none;">Jadwal</a></li>
+                        <li class="list-group-item"><a href="{{ route('blog.index') }}" style="color: black; text-decoration: none;">Artikel</a></li>
+                        <li class="list-group-item"><a href="{{ route('faq') }}" style="color: black; text-decoration: none;">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-10 mb-3">
                     <div class="card border-0 shadow custom-card">
                         <div class="card-body">
                             <!-- Tombol untuk menambahkan data -->
