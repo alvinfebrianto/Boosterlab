@@ -81,11 +81,15 @@
                                 <label class="col-sm-2 col-form-label" style="font-weight: bold;">Nama Anak</label>
                                 <div class="col-sm-10">
                                     <!-- Select Box -->
-                                    <select class="form-select @error('nama') is-invalid @enderror" name="nama" aria-label="Default select example" required autofocus style="font-size: 15px;">
-                                        <option value="" disabled selected hidden></option>
-                                        @foreach ($anakList as $namaAnak)
-                                            <option value="{{ $namaAnak->nama }}" {{ (isset($data) && $data->anak_id == $namaAnak->nama) ? 'selected' : '' }}>{{ $namaAnak->nama }}</option>
-                                        @endforeach
+                                    <select class="form-select @error('nama') is-invalid @enderror" name="nama" aria-label="Default select example" required autofocus style="font-size: 15px;" {{ $anakList->isEmpty() ? 'disabled' : '' }}>
+                                        @if($anakList->isEmpty())
+                                            <option value="" disabled selected>Tidak ada data anak</option>
+                                        @else
+                                            <option value="" disabled selected hidden></option>
+                                            @foreach ($anakList as $namaAnak)
+                                                <option value="{{ $namaAnak->nama }}" {{ (isset($data) && $data->anak_id == $namaAnak->nama) ? 'selected' : '' }}>{{ $namaAnak->nama }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                     <!-- End of Select Box -->
                                 </div>
