@@ -83,22 +83,43 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Nama</th>
-                                            <th scope="col">Jenis Kelamin</th>
-                                            <th scope="col">Tanggal Lahir</th>
-                                            <th scope="col">Umur</th>
+                                            @php
+                                                $columns = [
+                                                    ['key' => 'nomor', 'label' => '#'],
+                                                    ['key' => 'nama', 'label' => 'Nama'],
+                                                    ['key' => 'gender', 'label' => 'Jenis Kelamin'],
+                                                    ['key' => 'tanggal_lahir', 'label' => 'Tanggal Lahir'],
+                                                    ['key' => 'tanggal_lahir', 'label' => 'Umur'],
+                                                ];
+                                            @endphp
+                                            @foreach ($columns as $col)
+                                                @php
+                                                    $urlSortBy = $col['key'];
+                                                    $urlSortDir = 'asc';
+                                                    if ($sortBy === $col['key']) {
+                                                        $urlSortDir = $sortDir === 'asc' ? 'desc' : 'asc';
+                                                    }
+                                                    $icon = '';
+                                                    if ($sortBy === $col['key']) {
+                                                        $icon = $sortDir === 'asc' ? 'bi-caret-up-fill' : 'bi-caret-down-fill';
+                                                    }
+                                                @endphp
+                                                <th scope="col">
+                                                    <a href="{{ request()->fullUrlWithQuery(['sort_by' => $urlSortBy, 'sort_dir' => $urlSortDir]) }}" class="text-reset text-decoration-none d-inline-flex align-items-center gap-1">
+                                                        {{ $col['label'] }}
+                                                        @if ($icon)
+                                                            <i class="{{ $icon }}"></i>
+                                                        @endif
+                                                    </a>
+                                                </th>
+                                            @endforeach
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Mengurutkan koleksi anak-anak berdasarkan umur -->
-                                        @php
-                                            $sortedAnaks = $anaks->sortBy('umur');
-                                            $counter = 1;
-                                        @endphp
+                                        @php $counter = 1; @endphp
 
-                                        @forelse ($sortedAnaks as $anak)
+                                        @forelse ($anaks as $anak)
                                             <tr>
                                                 <td>{{ $counter++ }}</td>
                                                 <td>{{ $anak->nama }}</td>
@@ -132,7 +153,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="7">
+                                                <td colspan="6">
                                                     <div class="alert alert-danger">
                                                         Data Anak Masih Kosong.
                                                     </div>
@@ -141,7 +162,7 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-                                {{ $anaks->links() }}
+                                {{ $anaks->appends(['sort_by' => $sortBy, 'sort_dir' => $sortDir])->links() }}
                             </div>
                         </div>
                     </div>

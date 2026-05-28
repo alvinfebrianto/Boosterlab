@@ -15,10 +15,14 @@ class AnakController extends Controller
     }
 
     // Menampilkan halaman index anak dengan daftar data anak
-    public function index()
+    public function index(Request $request)
     {
-        $anaks = Anak::latest()->paginate(10);
-        return view('home', compact('anaks'));
+        $allowedSorts = ['nomor', 'nama', 'gender', 'tanggal_lahir'];
+        $sortBy = in_array($request->get('sort_by'), $allowedSorts) ? $request->get('sort_by') : 'created_at';
+        $sortDir = $request->get('sort_dir') === 'asc' ? 'asc' : 'desc';
+
+        $anaks = Anak::orderBy($sortBy, $sortDir)->paginate(10);
+        return view('home', compact('anaks', 'sortBy', 'sortDir'));
     }
 
     // Menampilkan halaman tambah data anak
