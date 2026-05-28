@@ -21,11 +21,11 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label class="font-weight-bold">GAMBAR</label>
+                                <label class="font-weight-bold">Gambar</label>
                                 <input type="file" class="form-control" name="image">
                             </div>
                             <div class="form-group">
-                                <label class="font-weight-bold">JUDUL</label>
+                                <label class="font-weight-bold">Judul</label>
                                 <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $artikel->title) }}">
                                 <!-- error message untuk title -->
                                 @error('title')
@@ -35,7 +35,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="font-weight-bold">DESKRIPSI</label>
+                                <label class="font-weight-bold">Deskripsi</label>
                                 <textarea class="form-control @error('content') is-invalid @enderror" name="content" rows="5">{{ old('content', $artikel->content) }}</textarea>
                                 <!-- error message untuk content -->
                                 @error('content')
@@ -44,7 +44,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-md btn-primary">UPDATE</button>
+                            <button type="submit" class="btn btn-md btn-primary">Update</button>
                         </form> 
                     </div>
                 </div>

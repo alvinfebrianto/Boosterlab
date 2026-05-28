@@ -84,9 +84,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">GAMBAR</th>
-                                        <th scope="col">JUDUL</th>
-                                        <th scope="col">DESKRIPSI</th>
+                                        <th scope="col">Gambar</th>
+                                        <th scope="col">Judul</th>
+                                        <th scope="col">Deskripsi</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -148,10 +148,10 @@
     <script>
         @if(session()->has('success'))
             // Menampilkan pesan toastr untuk notifikasi sukses
-            toastr.success('{{ session('success') }}', 'BERHASIL!'); 
+            toastr.success('{{ session('success') }}', 'Berhasil!'); 
         @elseif(session()->has('error'))
             // Menampilkan pesan toastr untuk notifikasi kesalahan
-            toastr.error('{{ session('error') }}', 'GAGAL!'); 
+            toastr.error('{{ session('error') }}', 'Gagal!'); 
         @endif
     </script>
 </body>
