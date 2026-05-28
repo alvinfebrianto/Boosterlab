@@ -72,7 +72,7 @@
                 <div class="col-md-10 mb-3">
                     <div class="card border-0 shadow custom-card">
                         <div class="card-body">
-                            <form action="{{ route('detail.update', ['detail' => $detailAnak->id]) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('detail.update', ['anak' => $anak, 'detail' => $detailAnak->id]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row mb-4">

@@ -94,7 +94,7 @@
                                                 <td>{{ rtrim(rtrim($detail->tinggi, '0'), '.') }} Cm</td>
                                                 <td class="text-center">
                                                     <!-- Tombol untuk mengedit data -->
-                                                    <a href="/detail/{{ $detail->id}}/edit" class="btn btn-sm btn-primary mb-1">
+                                                    <a href="{{ route('detail.edit', ['anak' => $anak, 'detail' => $detail->id]) }}" class="btn btn-sm btn-primary mb-1">
                                                         <i class="bi bi-pencil"></i>
                                                     </a>
                                                 </td>

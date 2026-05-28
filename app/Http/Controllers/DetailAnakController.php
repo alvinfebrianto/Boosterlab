@@ -53,14 +53,13 @@ class DetailAnakController extends Controller
     }
 
     // Menampilkan halaman edit detail anak
-    public function edit($detail)
+    public function edit($anak, $detail)
     {
         $detailAnak = DetailAnak::findOrFail($detail);
-        return view('detail.edit', compact('detailAnak'));
+        return view('detail.edit', compact('detailAnak', 'anak'));
     }
 
-    // Memperbarui data detail anak yang ada
-    public function update(Request $request, $detail)
+    public function update(Request $request, $anak, $detail)
     {
         $this->validate($request, [
             'berat' => 'required|numeric',
@@ -70,7 +69,7 @@ class DetailAnakController extends Controller
         $detailAnak->berat = $request->berat;
         $detailAnak->tinggi = $request->tinggi;
         $detailAnak->save();
-        return redirect()->route('detail.index', ['anak' => $detailAnak->anak]);
+        return redirect()->route('detail.index', ['anak' => $anak]);
     }
 
     // Menampilkan halaman hasil

@@ -49,5 +49,5 @@ Route::get('/{anak}/detail', [DetailAnakController::class, 'index'])->name('deta
 Route::get('/{anak}/detail/create', [DetailAnakController::class, 'create'])->name('detail.create');
 Route::post('/{anak}/detail/', [DetailAnakController::class, 'store'])->name('detail.store');
 Route::get('/{anak}/detail/{detail}/edit', [DetailAnakController::class, 'edit'])->name('detail.edit');
-Route::put('/{anak}/detail/', [DetailAnakController::class, 'update'])->name('detail.update');
+Route::put('/{anak}/detail/{detail}', [DetailAnakController::class, 'update'])->name('detail.update');
 Route::get('/{anak}/detail/hasil', [DetailAnakController::class, 'hasil'])->name('detail.hasil');
