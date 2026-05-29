@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\Anak;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -41,13 +40,10 @@ class AnakController extends Controller
             'berat_lahir'   => 'required|numeric',
             'tinggi_lahir'  => 'required|numeric',
         ]);
-        $tanggalLahir = Carbon::parse($request->tanggal_lahir);
-        $umur = $tanggalLahir->diff(Carbon::now())->format('%y tahun %m bulan %d hari');
         $anak = Anak::create([
             'nama'          => $request->nama,
             'gender'        => $request->gender,
-            'tanggal_lahir' => $tanggalLahir,
-            'umur'          => $umur,
+            'tanggal_lahir' => $request->tanggal_lahir,
             'berat_lahir'   => $request->berat_lahir,
             'tinggi_lahir'  => $request->tinggi_lahir,
         ]);
@@ -82,7 +78,6 @@ class AnakController extends Controller
             'tinggi_lahir'  => 'required|numeric',
         ]);
         $anakData = $request->only(['nama', 'gender', 'tanggal_lahir', 'berat_lahir', 'tinggi_lahir']);
-        $anakData['umur'] = Carbon::parse($request->tanggal_lahir)->diff(Carbon::now())->format('%y tahun %m bulan %d hari');
         $anak = Anak::findOrFail($nomor);
         if ($anak->update($anakData)) {
             return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Diperbarui!']);

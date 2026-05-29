@@ -94,7 +94,6 @@ class DetailAnakTest extends TestCase
             'nama' => $nama,
             'gender' => 'Laki-laki',
             'tanggal_lahir' => '2024-01-01',
-            'umur' => '1 tahun',
             'berat_lahir' => 3.2,
             'tinggi_lahir' => 50,
         ]);
