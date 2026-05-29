@@ -22,4 +22,9 @@ class Anak extends Model
     protected $fillable = [
         'nama', 'gender', 'tanggal_lahir', 'umur', 'berat_lahir', 'tinggi_lahir'
     ];
+
+    public function detailAnaks()
+    {
+        return $this->hasMany(DetailAnak::class, 'anak_nomor', 'nomor');
+    }
 }

@@ -11,6 +11,11 @@ class DetailAnak extends Model
 
     // Daftar atribut yang dapat diisi (fillable) pada model ini
     protected $fillable = [
-        'bulan', 'berat', 'tinggi'
+        'anak_nomor', 'bulan', 'berat', 'tinggi'
     ];
+
+    public function anak()
+    {
+        return $this->belongsTo(Anak::class, 'anak_nomor', 'nomor');
+    }
 }
