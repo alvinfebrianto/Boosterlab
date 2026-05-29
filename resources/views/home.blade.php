@@ -136,7 +136,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('anak.destroy', $anak->nomor) }}" method="POST">
-                                                        <a href="{{ route('detail.index', $anak->nomor) }}" class="btn btn-sm btn-dark mb-1">
+                                                        <a href="{{ route('pengukuran.index', $anak->nomor) }}" class="btn btn-sm btn-dark mb-1">
                                                             <i class="bi bi-eye"></i>
                                                         </a>
                                                         <a href="{{ route('anak.edit', $anak->nomor) }}" class="btn btn-sm btn-primary mb-1">

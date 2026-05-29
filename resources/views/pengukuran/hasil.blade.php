@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Detail Anak | Boosterlab</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -13,7 +12,6 @@
 </head>
 <body>
     <div id="app">
-        <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -23,9 +21,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto"></ul>
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         @guest
                             @if (Route::has('login'))
@@ -70,39 +66,57 @@
                     </ul>
                 </div>
                 <div class="col-md-10 mb-3">
-                    <div class="card border-0 shadow custom-card">
+                    <div class="card shadow custom-card">
                         <div class="card-body">
-                            <!-- Tombol untuk menambahkan data -->
-                            <a href="{{ route('detail.create', $anak) }}" class="btn btn-md btn-success mb-3">Tambah Data</a>
-                            <!-- Tombol untuk melihat hasil -->
-                            <a href="{{ route('detail.hasil', $anak) }}" class="btn btn-md btn-warning mb-3">Hasil</a>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Bulan ke</th>
-                                            <th scope="col">Berat</th>
-                                            <th scope="col">Tinggi</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($detailanak as $detail)
-                                            <tr>
-                                                <td>{{ $detail->bulan }}</td>
-                                                <td>{{ rtrim(rtrim($detail->berat, '0'), '.') }} Kg</td>
-                                                <td>{{ rtrim(rtrim($detail->tinggi, '0'), '.') }} Cm</td>
-                                                <td class="text-center">
-                                                    <!-- Tombol untuk mengedit data -->
-                                                    <a href="{{ route('detail.edit', ['anak' => $anak, 'detail' => $detail->id]) }}" class="btn btn-sm btn-primary mb-1">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                            <h3 class="card-title text-center mb-4"><strong>Hasil Kartu Imunisasi Anak</strong></h3>
+                            <h4 class="card-title"><strong>Profil</strong></h4>
+                            <ul class="list-group">
+                                <li class="list-group-item" style="font-size: 16px;">Nama Anak: {{ $anak->nama }}</li>
+                                <li class="list-group-item" style="font-size: 16px;">Jenis Kelamin: {{ $anak->gender }}</li>
+                                <li class="list-group-item" style="font-size: 16px;">Umur: {{ $anak->umur }}</li>
+                                <li class="list-group-item" style="font-size: 16px;">Berat: {{ rtrim(rtrim($anak->berat_lahir, '0'), '.') }} Kg</li>
+                                <li class="list-group-item" style="font-size: 16px;">Tinggi: {{ rtrim(rtrim($anak->tinggi_lahir, '0'), '.') }} Cm</li>
+                            </ul>
+                            <h4 class="card-title mt-4"><strong>Imunisasi</strong></h4>
+                            <ul class="list-group">
+                                <li class="list-group-item" style="font-size: 16px;"><strong>DPT2 - Hepatitis B2 - HIB 2</strong><br>
+                                    Mencegah penularan penyakit:<br>
+                                    <span class="bullet-point">•</span> Difteri ... <br>
+                                    <span class="bullet-point">•</span> Batuk Rejan ... <br>
+                                    <span class="bullet-point">•</span> Tetanus.<br>
+                                    <span class="bullet-point">•</span> Hepatitis B ... <br>
+                                    <span class="bullet-point">•</span> Infeksi HIB ... 
+                                </li>
+                                <li class="list-group-item" style="font-size: 16px;"><strong>Polio 3</strong><br>
+                                    Mencegah penularan penyakit Polio ...
+                                </li>
+                            </ul>
+                            <h4 class="card-title mt-4"><strong>Kebutuhan Gizi</strong></h4>
+                            <ul class="list-group">
+                                <li class="list-group-item" style="font-size: 16px;">Kebutuhan gizi pada bayi usia 0-6 bulan cukup terpenuhi dari ASI saja (ASI Eksklusif)<br>
+                                    <span class="bullet-point">•</span> Berikan ASI ... <br>
+                                    <span class="bullet-point">•</span> Jangan berikan ... <br>
+                                    ...
+                                </li>
+                            </ul>
+                            <h4 class="card-title mt-4"><strong>Tahap Perkembangan</strong></h4>
+                            <ul class="list-group">
+                                <li class="list-group-item" style="font-size: 16px;">
+                                    <span class="bullet-point">•</span> Mengangkat kepala ... <br>
+                                    ...
+                                </li>
+                            </ul>
+                            <h4 class="card-title mt-4"><strong>Stimulasi</strong></h4>
+                            <ul class="list-group">
+                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan gerak kasar</strong><br>...</li>
+                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan gerak halus</strong><br>...</li>
+                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan Bicara dan Bahasa</strong><br>...</li>
+                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan Sosialisasi dan Kemandirian</strong><br>...</li>
+                            </ul>
+                            <h4 class="card-title mt-4"><strong>Tips Sehat</strong></h4>
+                            <ul class="list-group">
+                                <li class="list-group-item" style="font-size: 16px;">...</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

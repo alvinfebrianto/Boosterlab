@@ -12,7 +12,6 @@
 </head>
 <body>
     <div id="app">
-        <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -22,9 +21,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto"></ul>
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         @guest
                             @if (Route::has('login'))
@@ -58,7 +55,6 @@
                 </div>
             </div>
         </nav>
-        <!-- Content -->
         <div class="container mt-3 mb-3">
             <div class="row justify-content-center">
                 <div class="col-md-2 mb-3">
@@ -72,22 +68,20 @@
                 <div class="col-md-10 mb-3">
                     <div class="card border-0 shadow custom-card">
                         <div class="card-body">
-                            <form action="{{ route('detail.update', ['anak' => $anak, 'detail' => $detailAnak->id]) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('pengukuran.update', ['anak' => $anak, 'pengukuran' => $pengukuran->id]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row mb-4">
                                     <label class="col-sm-2 col-form-label" style="font-weight: bold;">Bulan ke-</label>
                                     <div class="col-sm-10">
-                                        <!-- Input untuk mengedit data bulan -->
-                                        <input type="text" class="form-control" value="{{ $detailAnak->bulan }}" disabled readonly>
-                                        <input type="hidden" name="bulan" value="{{ $detailAnak->bulan }}">
+                                        <input type="text" class="form-control" value="{{ $pengukuran->bulan }}" disabled readonly>
+                                        <input type="hidden" name="bulan" value="{{ $pengukuran->bulan }}">
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <label class="col-sm-2 col-form-label" style="font-weight: bold;">Berat</label>
                                     <div class="col-sm-10">
-                                        <!-- Input untuk mengedit data berat -->
-                                        <input type="text" class="form-control @error('berat') is-invalid @enderror" name="berat" required autofocus value="{{ $detailAnak->berat }}">
+                                        <input type="text" class="form-control @error('berat') is-invalid @enderror" name="berat" required autofocus value="{{ $pengukuran->berat }}">
                                         @error('berat')
                                             <div class="alert alert-danger mt-2">
                                                 {{ $message }}
@@ -98,8 +92,7 @@
                                 <div class="row mb-4">
                                     <label class="col-sm-2 col-form-label" style="font-weight: bold;">Tinggi</label>
                                     <div class="col-sm-10">
-                                        <!-- Input untuk memasukkan data tinggi -->
-                                        <input type="text" class="form-control @error('tinggi') is-invalid @enderror" name="tinggi" required autofocus value="{{ $detailAnak->tinggi }}">
+                                        <input type="text" class="form-control @error('tinggi') is-invalid @enderror" name="tinggi" required autofocus value="{{ $pengukuran->tinggi }}">
                                         @error('tinggi')
                                             <div class="alert alert-danger mt-2">
                                                 {{ $message }}

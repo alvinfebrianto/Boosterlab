@@ -11,24 +11,24 @@ class DetailAnakTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_detail_records_are_scoped_to_the_current_anak()
+    public function test_pengukuran_records_are_scoped_to_the_current_anak()
     {
         $user = User::factory()->create();
         $anak = $this->createAnak('Anak A');
         $otherAnak = $this->createAnak('Anak B');
 
-        $anak->detailAnaks()->create([
+        $anak->pengukurans()->create([
             'bulan' => 0,
             'berat' => 10,
             'tinggi' => 80,
         ]);
-        $otherAnak->detailAnaks()->create([
+        $otherAnak->pengukurans()->create([
             'bulan' => 0,
             'berat' => 20,
             'tinggi' => 100,
         ]);
 
-        $response = $this->actingAs($user)->get(route('detail.index', $anak));
+        $response = $this->actingAs($user)->get(route('pengukuran.index', $anak));
 
         $response->assertOk();
         $response->assertSee('10 Kg');
@@ -43,25 +43,25 @@ class DetailAnakTest extends TestCase
         $anak = $this->createAnak('Anak A');
         $otherAnak = $this->createAnak('Anak B');
 
-        $anak->detailAnaks()->create([
+        $anak->pengukurans()->create([
             'bulan' => 0,
             'berat' => 10,
             'tinggi' => 80,
         ]);
-        $otherAnak->detailAnaks()->create([
+        $otherAnak->pengukurans()->create([
             'bulan' => 7,
             'berat' => 20,
             'tinggi' => 100,
         ]);
 
-        $response = $this->actingAs($user)->post(route('detail.store', $anak), [
+        $response = $this->actingAs($user)->post(route('pengukuran.store', $anak), [
             'berat' => 11,
             'tinggi' => 81,
             'bulan' => 99,
         ]);
 
-        $response->assertRedirect(route('detail.index', $anak));
-        $this->assertDatabaseHas('detail_anaks', [
+        $response->assertRedirect(route('pengukuran.index', $anak));
+        $this->assertDatabaseHas('pengukurans', [
             'anak_nomor' => $anak->nomor,
             'bulan' => 1,
             'berat' => 11,
@@ -69,20 +69,20 @@ class DetailAnakTest extends TestCase
         ]);
     }
 
-    public function test_detail_cannot_be_edited_through_another_anak_route()
+    public function test_pengukuran_cannot_be_edited_through_another_anak_route()
     {
         $user = User::factory()->create();
         $anak = $this->createAnak('Anak A');
         $otherAnak = $this->createAnak('Anak B');
-        $detail = $anak->detailAnaks()->create([
+        $pengukuran = $anak->pengukurans()->create([
             'bulan' => 0,
             'berat' => 10,
             'tinggi' => 80,
         ]);
 
-        $response = $this->actingAs($user)->get(route('detail.edit', [
+        $response = $this->actingAs($user)->get(route('pengukuran.edit', [
             'anak' => $otherAnak,
-            'detail' => $detail->id,
+            'pengukuran' => $pengukuran->id,
         ]));
 
         $response->assertNotFound();

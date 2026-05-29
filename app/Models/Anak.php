@@ -28,8 +28,8 @@ class Anak extends Model
         );
     }
 
-    public function detailAnaks()
+    public function pengukurans()
     {
-        return $this->hasMany(DetailAnak::class, 'anak_nomor', 'nomor');
+        return $this->hasMany(Pengukuran::class, 'anak_nomor', 'nomor');
     }
 }

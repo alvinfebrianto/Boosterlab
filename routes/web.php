@@ -5,10 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnakController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\DetailAnakController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\PengukuranController;
 
 // Autentikasi
 Auth::routes();
@@ -22,7 +22,7 @@ Route::get('/admin', [HomeController::class, 'adminHome'])->name('admin.home')->
 Route::get('/create', [AnakController::class, 'create'])->name('anak.create');
 Route::post('/', [AnakController::class, 'store'])->name('anak.store');
 Route::get('/{anak}/edit', [AnakController::class, 'edit'])->name('anak.edit');
-Route::put('/anak/{anak}', [AnakController::class, 'update'])->name('anak.update');
+Route::put('/{anak}', [AnakController::class, 'update'])->name('anak.update');
 Route::delete('/{anak}', [AnakController::class, 'destroy'])->name('anak.destroy');
 
 // Route untuk halaman artikel
@@ -44,10 +44,10 @@ Route::get('/adminjadwal', [JadwalController::class, 'adminJadwal'])->name('admi
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::get('/adminfaq', [FaqController::class, 'adminFAQ'])->name('admin.faq')->middleware('is_admin');
 
-// Route untuk halaman detail anak
-Route::get('/{anak}/detail', [DetailAnakController::class, 'index'])->name('detail.index');
-Route::get('/{anak}/detail/create', [DetailAnakController::class, 'create'])->name('detail.create');
-Route::post('/{anak}/detail/', [DetailAnakController::class, 'store'])->name('detail.store');
-Route::get('/{anak}/detail/{detail}/edit', [DetailAnakController::class, 'edit'])->name('detail.edit');
-Route::put('/{anak}/detail/{detail}', [DetailAnakController::class, 'update'])->name('detail.update');
-Route::get('/{anak}/detail/hasil', [DetailAnakController::class, 'hasil'])->name('detail.hasil');
+// Route untuk halaman pengukuran
+Route::get('/{anak}/pengukuran', [PengukuranController::class, 'index'])->name('pengukuran.index');
+Route::get('/{anak}/pengukuran/create', [PengukuranController::class, 'create'])->name('pengukuran.create');
+Route::post('/{anak}/pengukuran/', [PengukuranController::class, 'store'])->name('pengukuran.store');
+Route::get('/{anak}/pengukuran/{pengukuran}/edit', [PengukuranController::class, 'edit'])->name('pengukuran.edit');
+Route::put('/{anak}/pengukuran/{pengukuran}', [PengukuranController::class, 'update'])->name('pengukuran.update');
+Route::get('/{anak}/pengukuran/hasil', [PengukuranController::class, 'hasil'])->name('pengukuran.hasil');

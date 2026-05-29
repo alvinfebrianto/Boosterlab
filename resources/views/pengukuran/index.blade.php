@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Tambah Data | Boosterlab</title>
+    <title>Detail Anak | Boosterlab</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -12,7 +13,6 @@
 </head>
 <body>
     <div id="app">
-        <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -22,9 +22,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto"></ul>
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         @guest
                             @if (Route::has('login'))
@@ -58,7 +56,6 @@
                 </div>
             </div>
         </nav>
-        <!-- Content -->
         <div class="container mt-3 mb-3">
             <div class="row justify-content-center">
                 <div class="col-md-2 mb-3">
@@ -72,43 +69,34 @@
                 <div class="col-md-10 mb-3">
                     <div class="card border-0 shadow custom-card">
                         <div class="card-body">
-                            <form action="{{ route('detail.store', ['anak' => $anak]) }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('POST')
-                                <div class="row mb-4">
-                                    <label class="col-sm-2 col-form-label" style="font-weight: bold;">Bulan ke-</label>
-                                    <div class="col-sm-10">
-                                        <!-- Input untuk menampilkan dan menyimpan bulan -->
-                                        <input type="text" class="form-control" value="{{ $bulan }}" disabled readonly>
-                                        <input type="hidden" name="bulan" value="{{ $bulan }}">
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label class="col-sm-2 col-form-label" style="font-weight: bold;">Berat</label>
-                                    <div class="col-sm-10">
-                                        <!-- Input untuk memasukkan data berat -->
-                                        <input type="text" class="form-control @error('berat') is-invalid @enderror" name="berat" required autofocus value="{{ old('berat') }}">
-                                        @error('berat')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label class="col-sm-2 col-form-label" style="font-weight: bold;">Tinggi</label>
-                                    <div class="col-sm-10">
-                                        <!-- Input untuk memasukkan data tinggi -->
-                                        <input type="text" class="form-control @error('tinggi') is-invalid @enderror" name="tinggi" required autofocus value="{{ old('tinggi') }}">
-                                        @error('tinggi')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-md btn-primary">Simpan</button>
-                            </form>
+                            <a href="{{ route('pengukuran.create', $anak) }}" class="btn btn-md btn-success mb-3">Tambah Data</a>
+                            <a href="{{ route('pengukuran.hasil', $anak) }}" class="btn btn-md btn-warning mb-3">Hasil</a>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Bulan ke</th>
+                                            <th scope="col">Berat</th>
+                                            <th scope="col">Tinggi</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($pengukuran as $p)
+                                            <tr>
+                                                <td>{{ $p->bulan }}</td>
+                                                <td>{{ rtrim(rtrim($p->berat, '0'), '.') }} Kg</td>
+                                                <td>{{ rtrim(rtrim($p->tinggi, '0'), '.') }} Cm</td>
+                                                <td class="text-center">
+                                                    <a href="{{ route('pengukuran.edit', ['anak' => $anak, 'pengukuran' => $p->id]) }}" class="btn btn-sm btn-primary mb-1">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
