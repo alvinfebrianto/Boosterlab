@@ -80,89 +80,85 @@
                         <div class="card-body">
                             <a href="{{ route('anak.create') }}" class="btn btn-md btn-success mb-3">Tambah Data Anak</a>
                             <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            @php
-                                                $columns = [
-                                                    ['key' => 'nomor', 'label' => '#'],
-                                                    ['key' => 'nama', 'label' => 'Nama'],
-                                                    ['key' => 'gender', 'label' => 'Jenis Kelamin'],
-                                                    ['key' => 'tanggal_lahir', 'label' => 'Tanggal Lahir'],
-                                                    ['key' => 'tanggal_lahir', 'label' => 'Umur'],
-                                                ];
-                                            @endphp
-                                            @foreach ($columns as $col)
+                                @if ($anaks->count())
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
                                                 @php
-                                                    $urlSortBy = $col['key'];
-                                                    $urlSortDir = 'asc';
-                                                    if ($sortBy === $col['key']) {
-                                                        $urlSortDir = $sortDir === 'asc' ? 'desc' : 'asc';
-                                                    }
-                                                    $icon = '';
-                                                    if ($sortBy === $col['key']) {
-                                                        $icon = $sortDir === 'asc' ? 'bi-caret-up-fill' : 'bi-caret-down-fill';
-                                                    }
+                                                    $columns = [
+                                                        ['key' => 'nomor', 'label' => '#'],
+                                                        ['key' => 'nama', 'label' => 'Nama'],
+                                                        ['key' => 'gender', 'label' => 'Jenis Kelamin'],
+                                                        ['key' => 'tanggal_lahir', 'label' => 'Tanggal Lahir'],
+                                                        ['key' => 'tanggal_lahir', 'label' => 'Umur'],
+                                                    ];
                                                 @endphp
-                                                <th scope="col">
-                                                    <a href="{{ request()->fullUrlWithQuery(['sort_by' => $urlSortBy, 'sort_dir' => $urlSortDir]) }}" class="text-reset text-decoration-none d-inline-flex align-items-center gap-1">
-                                                        {{ $col['label'] }}
-                                                        @if ($icon)
-                                                            <i class="{{ $icon }}"></i>
-                                                        @endif
-                                                    </a>
-                                                </th>
-                                            @endforeach
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php $counter = 1; @endphp
-
-                                        @forelse ($anaks as $anak)
-                                            <tr>
-                                                <td>{{ $counter++ }}</td>
-                                                <td>{{ $anak->nama }}</td>
-                                                <td>{{ $anak->gender }}</td>
-                                                <td>{{ $anak->tanggal_lahir }}</td>
-                                                <td>
-                                                    <!-- Menghitung umur anak dalam bulan -->
+                                                @foreach ($columns as $col)
                                                     @php
-                                                        $tanggalLahir = \Carbon\Carbon::parse($anak->tanggal_lahir);
-                                                        $umur = $tanggalLahir->diff(\Carbon\Carbon::now());
-                                                        $umurBulan = ($umur->format('%y') * 12) + $umur->format('%m');
-                                                        echo $umurBulan . ' bulan';
+                                                        $urlSortBy = $col['key'];
+                                                        $urlSortDir = 'asc';
+                                                        if ($sortBy === $col['key']) {
+                                                            $urlSortDir = $sortDir === 'asc' ? 'desc' : 'asc';
+                                                        }
+                                                        $icon = '';
+                                                        if ($sortBy === $col['key']) {
+                                                            $icon = $sortDir === 'asc' ? 'bi-caret-up-fill' : 'bi-caret-down-fill';
+                                                        }
                                                     @endphp
-                                                </td>
-                                                <td class="text-center">
-                                                    <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('anak.destroy', $anak->nomor) }}" method="POST">
-                                                        <a href="{{ route('pengukuran.index', $anak->nomor) }}" class="btn btn-sm btn-dark mb-1">
-                                                            <i class="bi bi-eye"></i>
+                                                    <th scope="col">
+                                                        <a href="{{ request()->fullUrlWithQuery(['sort_by' => $urlSortBy, 'sort_dir' => $urlSortDir]) }}" class="text-reset text-decoration-none d-inline-flex align-items-center gap-1">
+                                                            {{ $col['label'] }}
+                                                            @if ($icon)
+                                                                <i class="{{ $icon }}"></i>
+                                                            @endif
                                                         </a>
-                                                        <a href="{{ route('anak.edit', $anak->nomor) }}" class="btn btn-sm btn-primary mb-1">
-                                                            <i class="bi bi-pencil"></i>
-                                                        </a>
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <!-- Tombol Hapus -->
-                                                        <button type="submit" class="btn btn-sm btn-danger mb-1">
-                                                            <i class="bi bi-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
+                                                    </th>
+                                                @endforeach
+                                                <th scope="col"></th>
                                             </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="6">
-                                                    <div class="alert alert-danger">
-                                                        Data Anak Masih Kosong.
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                                {{ $anaks->appends(['sort_by' => $sortBy, 'sort_dir' => $sortDir])->links() }}
+                                        </thead>
+                                        <tbody>
+                                            @php $counter = 1; @endphp
+
+                                            @foreach ($anaks as $anak)
+                                                <tr>
+                                                    <td>{{ $counter++ }}</td>
+                                                    <td>{{ $anak->nama }}</td>
+                                                    <td>{{ $anak->gender }}</td>
+                                                    <td>{{ $anak->tanggal_lahir }}</td>
+                                                    <td>
+                                                        @php
+                                                            $tanggalLahir = \Carbon\Carbon::parse($anak->tanggal_lahir);
+                                                            $umur = $tanggalLahir->diff(\Carbon\Carbon::now());
+                                                            $umurBulan = ($umur->format('%y') * 12) + $umur->format('%m');
+                                                            echo $umurBulan . ' bulan';
+                                                        @endphp
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('anak.destroy', $anak->nomor) }}" method="POST">
+                                                            <a href="{{ route('pengukuran.index', $anak->nomor) }}" class="btn btn-sm btn-dark mb-1">
+                                                                <i class="bi bi-eye"></i>
+                                                            </a>
+                                                            <a href="{{ route('anak.edit', $anak->nomor) }}" class="btn btn-sm btn-primary mb-1">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </a>
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger mb-1">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{ $anaks->appends(['sort_by' => $sortBy, 'sort_dir' => $sortDir])->links() }}
+                                @else
+                                    <div class="alert alert-danger">
+                                        Data Anak Masih Kosong.
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
