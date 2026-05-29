@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePengukuranRequest;
+use App\Http\Requests\UpdatePengukuranRequest;
 use App\Models\Anak;
-use Illuminate\Http\Request;
 
 class DetailAnakController extends Controller
 {
@@ -32,13 +33,8 @@ class DetailAnakController extends Controller
     }
 
     // Menyimpan data detail anak baru
-    public function store(Request $request, Anak $anak)
+    public function store(StorePengukuranRequest $request, Anak $anak)
     {
-        $this->validate($request, [
-            'berat' => 'required|numeric',
-            'tinggi' => 'required|numeric',
-        ]);
-
         $latestBulan = $anak->detailAnaks()->max('bulan');
         $bulan = is_null($latestBulan) ? 0 : $latestBulan + 1;
 
@@ -59,13 +55,8 @@ class DetailAnakController extends Controller
         return view('detail.edit', compact('detailAnak', 'anak'));
     }
 
-    public function update(Request $request, Anak $anak, $detail)
+    public function update(UpdatePengukuranRequest $request, Anak $anak, $detail)
     {
-        $this->validate($request, [
-            'berat' => 'required|numeric',
-            'tinggi' => 'required|numeric',
-        ]);
-
         $detailAnak = $anak->detailAnaks()->findOrFail($detail);
         $detailAnak->berat = $request->berat;
         $detailAnak->tinggi = $request->tinggi;

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAnakRequest;
+use App\Http\Requests\UpdateAnakRequest;
 use App\Models\Anak;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -31,15 +33,8 @@ class AnakController extends Controller
     }
 
     // Menyimpan data anak baru
-    public function store(Request $request)
+    public function store(StoreAnakRequest $request)
     {
-        $this->validate($request, [
-            'nama'          => 'required',
-            'gender'        => 'required',
-            'tanggal_lahir' => 'required|date',
-            'berat_lahir'   => 'required|numeric',
-            'tinggi_lahir'  => 'required|numeric',
-        ]);
         $anak = Anak::create([
             'nama'          => $request->nama,
             'gender'        => $request->gender,
@@ -68,15 +63,8 @@ class AnakController extends Controller
     }
 
     // Memperbarui data anak yang ada
-    public function update(Request $request, $nomor)
+    public function update(UpdateAnakRequest $request, $nomor)
     {
-        $this->validate($request, [
-            'nama'          => 'required',
-            'gender'        => 'required',
-            'tanggal_lahir' => 'required|date',
-            'berat_lahir'   => 'required|numeric',
-            'tinggi_lahir'  => 'required|numeric',
-        ]);
         $anakData = $request->only(['nama', 'gender', 'tanggal_lahir', 'berat_lahir', 'tinggi_lahir']);
         $anak = Anak::findOrFail($nomor);
         if ($anak->update($anakData)) {
