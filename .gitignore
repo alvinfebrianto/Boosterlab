@@ -6,6 +6,7 @@
 .env
 .env.backup
 .phpunit.result.cache
+.phpunit.cache/
 base.md
 Homestead.json
 Homestead.yaml
