@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAnakRequest;
 use App\Http\Requests\UpdateAnakRequest;
 use App\Models\Anak;
+use App\Services\PertumbuhanAnak;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class AnakController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(
+        private PertumbuhanAnak $pertumbuhanAnak,
+    ) {
         $this->middleware('auth');
     }
 
@@ -35,18 +37,9 @@ class AnakController extends Controller
     // Menyimpan data anak baru
     public function store(StoreAnakRequest $request)
     {
-        $anak = Anak::create([
-            'nama'          => $request->nama,
-            'gender'        => $request->gender,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'berat_lahir'   => $request->berat_lahir,
-            'tinggi_lahir'  => $request->tinggi_lahir,
-        ]);
-        if ($anak) {
-            return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Disimpan!']);
-        } else {
-            return redirect()->route('home')->with(['error' => 'Data Anak Gagal Disimpan!']);
-        }
+        $this->pertumbuhanAnak->registerChild($request->validated());
+
+        return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Disimpan!']);
     }
 
     // Menampilkan halaman detail data anak
@@ -65,24 +58,16 @@ class AnakController extends Controller
     // Memperbarui data anak yang ada
     public function update(UpdateAnakRequest $request, $nomor)
     {
-        $anakData = $request->only(['nama', 'gender', 'tanggal_lahir', 'berat_lahir', 'tinggi_lahir']);
-        $anak = Anak::findOrFail($nomor);
-        if ($anak->update($anakData)) {
-            return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Diperbarui!']);
-        } else {
-            return redirect()->route('home')->with(['error' => 'Data Anak Gagal Diperbarui!']);
-        }
+        $this->pertumbuhanAnak->updateChild($nomor, $request->validated());
+
+        return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Diperbarui!']);
     }
 
     // Menghapus data anak
     public function destroy($nomor)
     {
-        $anak = Anak::findOrFail($nomor);
-        $anak->delete();
-        if ($anak) {
-            return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Dihapus!']);
-        } else {
-            return redirect()->route('home')->with(['error' => 'Data Anak Gagal Dihapus!']);
-        }
+        $this->pertumbuhanAnak->removeChild($nomor);
+
+        return redirect()->route('home')->with(['success' => 'Data Anak Berhasil Dihapus!']);
     }
 }

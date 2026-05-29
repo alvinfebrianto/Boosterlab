@@ -50,4 +50,5 @@ Route::get('/{anak}/pengukuran/create', [PengukuranController::class, 'create'])
 Route::post('/{anak}/pengukuran/', [PengukuranController::class, 'store'])->name('pengukuran.store');
 Route::get('/{anak}/pengukuran/{pengukuran}/edit', [PengukuranController::class, 'edit'])->name('pengukuran.edit');
 Route::put('/{anak}/pengukuran/{pengukuran}', [PengukuranController::class, 'update'])->name('pengukuran.update');
+Route::delete('/{anak}/pengukuran/{pengukuran}', [PengukuranController::class, 'destroy'])->name('pengukuran.destroy');
 Route::get('/{anak}/pengukuran/hasil', [PengukuranController::class, 'hasil'])->name('pengukuran.hasil');

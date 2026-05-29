@@ -5,19 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePengukuranRequest;
 use App\Http\Requests\UpdatePengukuranRequest;
 use App\Models\Anak;
+use App\Services\PertumbuhanAnak;
 
 class PengukuranController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(
+        private PertumbuhanAnak $pertumbuhanAnak,
+    ) {
         $this->middleware('auth');
     }
 
     public function index(Anak $anak)
     {
-        $pengukuran = $anak->pengukurans()
-            ->orderBy('bulan')
-            ->get();
+        $pengukuran = $this->pertumbuhanAnak->growthHistory($anak);
 
         return view('pengukuran.index', compact('pengukuran', 'anak'));
     }
@@ -32,14 +32,7 @@ class PengukuranController extends Controller
 
     public function store(StorePengukuranRequest $request, Anak $anak)
     {
-        $latestBulan = $anak->pengukurans()->max('bulan');
-        $bulan = is_null($latestBulan) ? 0 : $latestBulan + 1;
-
-        $anak->pengukurans()->create([
-            'bulan' => $bulan,
-            'berat' => $request->berat,
-            'tinggi' => $request->tinggi,
-        ]);
+        $this->pertumbuhanAnak->recordGrowth($anak, $request->validated());
 
         return redirect()->route('pengukuran.index', ['anak' => $anak]);
     }
@@ -53,10 +46,14 @@ class PengukuranController extends Controller
 
     public function update(UpdatePengukuranRequest $request, Anak $anak, $detail)
     {
-        $pengukuran = $anak->pengukurans()->findOrFail($detail);
-        $pengukuran->berat = $request->berat;
-        $pengukuran->tinggi = $request->tinggi;
-        $pengukuran->save();
+        $this->pertumbuhanAnak->updateMeasurement($detail, $request->validated());
+
+        return redirect()->route('pengukuran.index', ['anak' => $anak]);
+    }
+
+    public function destroy(Anak $anak, $detail)
+    {
+        $this->pertumbuhanAnak->removeMeasurement($detail);
 
         return redirect()->route('pengukuran.index', ['anak' => $anak]);
     }
