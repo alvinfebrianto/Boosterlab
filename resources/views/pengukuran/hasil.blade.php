@@ -81,41 +81,78 @@
                             <ul class="list-group">
                                 <li class="list-group-item" style="font-size: 16px;"><strong>DPT2 - Hepatitis B2 - HIB 2</strong><br>
                                     Mencegah penularan penyakit:<br>
-                                    <span class="bullet-point">•</span> Difteri ... <br>
-                                    <span class="bullet-point">•</span> Batuk Rejan ... <br>
+                                    <span class="bullet-point">•</span> Difteri yang menyebabkan penyumbatan jalan nafas.<br>
+                                    <span class="bullet-point">•</span> Batuk Rejan (batuk 100 hari).<br>
                                     <span class="bullet-point">•</span> Tetanus.<br>
-                                    <span class="bullet-point">•</span> Hepatitis B ... <br>
-                                    <span class="bullet-point">•</span> Infeksi HIB ... 
+                                    <span class="bullet-point">•</span> Hepatitis B yang menyebabkan kerusakan hati.<br>
+                                    <span class="bullet-point">•</span> Infeksi HIB menyebabkan meningitis (radang selaput otak).
                                 </li>
                                 <li class="list-group-item" style="font-size: 16px;"><strong>Polio 3</strong><br>
-                                    Mencegah penularan penyakit Polio ...
+                                    Mencegah penularan penyakit Polio yang dapat menyebabkan lumpuh layuh pada tungkai dan atau lengan.
                                 </li>
                             </ul>
                             <h4 class="card-title mt-4"><strong>Kebutuhan Gizi</strong></h4>
                             <ul class="list-group">
                                 <li class="list-group-item" style="font-size: 16px;">Kebutuhan gizi pada bayi usia 0-6 bulan cukup terpenuhi dari ASI saja (ASI Eksklusif)<br>
-                                    <span class="bullet-point">•</span> Berikan ASI ... <br>
-                                    <span class="bullet-point">•</span> Jangan berikan ... <br>
-                                    ...
+                                    <span class="bullet-point">•</span> Berikan ASI yang pertama keluar dan berwarna kekuningan (kolostrum).<br>
+                                    <span class="bullet-point">•</span> Jangan berikan makanan atau minuman selain ASI.<br>
+                                    <span class="bullet-point">•</span> Susui bayi sesering mungkin.<br>
+                                    <span class="bullet-point">•</span> Susui setiap bayi menginginkan, paling sedikit 8 kali sehari.<br>
+                                    <span class="bullet-point">•</span> Jika bayi tidur lebih dari 3 jam, bangunkan lalu susui.<br>
+                                    <span class="bullet-point">•</span> Susui dengan payudara kanan dan kiri secara bergantian.<br>
+                                    <span class="bullet-point">•</span> Susui sampai payudara terasa kosong, lalu pindah ke payudara sisi lainnya.<br>
                                 </li>
                             </ul>
                             <h4 class="card-title mt-4"><strong>Tahap Perkembangan</strong></h4>
                             <ul class="list-group">
                                 <li class="list-group-item" style="font-size: 16px;">
-                                    <span class="bullet-point">•</span> Mengangkat kepala ... <br>
-                                    ...
+                                    <span class="bullet-point">•</span> Mengangkat kepala setinggi 45 derajat.<br>
+                                    <span class="bullet-point">•</span> Menggerakkan kepala dari kiri/kanan ke tengah.<br>
+                                    <span class="bullet-point">•</span> Melihat dan menatap wajah anda.<br>
+                                    <span class="bullet-point">•</span> Mengoceh spontan atau bereaksi dengan mengoceh.<br>
+                                    <span class="bullet-point">•</span> Suka tertawa keras.<br>
+                                    <span class="bullet-point">•</span> Bereaksi terkejut terhadap suara keras.<br>
+                                    <span class="bullet-point">•</span> Membalas tersenyum ketika diajak bicara/tersenyum.<br>
+                                    <span class="bullet-point">•</span> Mengenal ibu dengan penglihatan, penciuman, pendengaran, kontak.<br>
                                 </li>
                             </ul>
                             <h4 class="card-title mt-4"><strong>Stimulasi</strong></h4>
                             <ul class="list-group">
-                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan gerak kasar</strong><br>...</li>
-                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan gerak halus</strong><br>...</li>
-                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan Bicara dan Bahasa</strong><br>...</li>
-                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan Sosialisasi dan Kemandirian</strong><br>...</li>
+                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan gerak kasar</strong><br>
+                                    <span class="bullet-point">•</span> Mengangkat kepala.<br>
+                                    <span class="bullet-point">•</span> Berguling-guling.<br>
+                                    <span class="bullet-point">•</span> Menahan kepala tetap tegak.<br>
+                                </li>
+                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan gerak halus</strong><br>
+                                    <span class="bullet-point">•</span> Melihat, meraih dan menendang mainan gantung.<br>
+                                    <span class="bullet-point">•</span> Memperhatikan benda bergerak.<br>
+                                    <span class="bullet-point">•</span> Melihat benda-benda kecil.<br>
+                                    <span class="bullet-point">•</span> Memegang benda.<br>
+                                    <span class="bullet-point">•</span> Meraba dan merasakan bentuk permukaan.<br>
+                                </li>
+                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan Bicara dan Bahasa</strong><br>
+                                    <span class="bullet-point">•</span> Berbicara.<br>
+                                    <span class="bullet-point">•</span> Meniru suara-suara.<br>
+                                    <span class="bullet-point">•</span> Mengenali berbagai suara.<br>
+                                </li>
+                                <li class="list-group-item" style="font-size: 16px;"><strong>Kemampuan Sosialisasi dan Kemandirian</strong><br>
+                                    <span class="bullet-point">•</span> Memberi rasa aman dan kasih sayang.<br>
+                                    <span class="bullet-point">•</span> Mengajak bayi tersenyum.<br>
+                                    <span class="bullet-point">•</span> Mengenali berbagai suara.<br>
+                                    <span class="bullet-point">•</span> Mengajak bayi mengamati benda-benda dan keadaan di sekitarnya.<br>
+                                    <span class="bullet-point">•</span> Meniru ocehan dan mimik muka bayi.<br>
+                                    <span class="bullet-point">•</span> Mengayun bayi.<br>
+                                    <span class="bullet-point">•</span> Menina-bobokan.<br>
+                                </li>
                             </ul>
                             <h4 class="card-title mt-4"><strong>Tips Sehat</strong></h4>
                             <ul class="list-group">
-                                <li class="list-group-item" style="font-size: 16px;">...</li>
+                                <li class="list-group-item" style="font-size: 16px;">
+                                    <span class="bullet-point">•</span> Minta anak menceritakan apa yang sedang dilakukan.<br>
+                                    <span class="bullet-point">•</span> Dengarkan anak ketika ia berbicara.<br>
+                                    <span class="bullet-point">•</span> Jika anak gagap, bantu anak bicara lebih lambat.<br>
+                                    <span class="bullet-point">•</span> Beri kesempatan anak bermain dan mencoba sesuatu yang baru dan awasi anak.<br>
+                                </li>
                             </ul>
                         </div>
                     </div>
