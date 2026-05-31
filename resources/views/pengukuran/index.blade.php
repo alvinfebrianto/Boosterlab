@@ -85,8 +85,8 @@
                                         @foreach($pengukuran as $p)
                                             <tr>
                                                 <td>{{ $p->bulan }}</td>
-                                                <td>{{ rtrim(rtrim($p->berat, '0'), '.') }} Kg</td>
-                                                <td>{{ rtrim(rtrim($p->tinggi, '0'), '.') }} Cm</td>
+                                                <td>{{ $p->berat }} Kg</td>
+                                                <td>{{ $p->tinggi }} Cm</td>
                                                 <td class="text-center">
                                                     <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('pengukuran.destroy', ['anak' => $anak, 'pengukuran' => $p->id]) }}" method="POST">
                                                         <a href="{{ route('pengukuran.edit', ['anak' => $anak, 'pengukuran' => $p->id]) }}" class="btn btn-sm btn-primary mb-1">
