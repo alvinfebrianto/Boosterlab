@@ -88,9 +88,18 @@
                                                 <td>{{ rtrim(rtrim($p->berat, '0'), '.') }} Kg</td>
                                                 <td>{{ rtrim(rtrim($p->tinggi, '0'), '.') }} Cm</td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('pengukuran.edit', ['anak' => $anak, 'pengukuran' => $p->id]) }}" class="btn btn-sm btn-primary mb-1">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </a>
+                                                    <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('pengukuran.destroy', ['anak' => $anak, 'pengukuran' => $p->id]) }}" method="POST">
+                                                        <a href="{{ route('pengukuran.edit', ['anak' => $anak, 'pengukuran' => $p->id]) }}" class="btn btn-sm btn-primary mb-1">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        @if ($p->bulan !== 0)
+                                                            <button type="submit" class="btn btn-sm btn-danger mb-1">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        @endif
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
