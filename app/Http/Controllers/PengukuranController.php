@@ -60,6 +60,8 @@ class PengukuranController extends Controller
 
     public function hasil(Anak $anak)
     {
-        return view('pengukuran.hasil', compact('anak'));
+        $pengukuran0 = $anak->pengukurans()->where('bulan', 0)->first();
+
+        return view('pengukuran.hasil', compact('anak', 'pengukuran0'));
     }
 }

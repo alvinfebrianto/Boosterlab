@@ -19,7 +19,7 @@ class PertumbuhanAnakTest extends TestCase
         $this->service = new PertumbuhanAnak();
     }
 
-    public function test_register_child_creates_anak_with_correct_data()
+    public function test_register_child_creates_anak_and_birth_measurement()
     {
         $data = [
             'nama' => 'Anak A',
@@ -35,18 +35,20 @@ class PertumbuhanAnakTest extends TestCase
         $this->assertEquals('Anak A', $anak->nama);
         $this->assertEquals('Laki-laki', $anak->gender);
         $this->assertEquals('2024-01-01', $anak->tanggal_lahir);
-        $this->assertEquals(3.2, $anak->berat_lahir);
-        $this->assertEquals(50, $anak->tinggi_lahir);
         $this->assertDatabaseHas('anaks', [
             'nama' => 'Anak A',
             'gender' => 'Laki-laki',
             'tanggal_lahir' => '2024-01-01',
-            'berat_lahir' => 3.2,
-            'tinggi_lahir' => 50,
+        ]);
+        $this->assertDatabaseHas('pengukurans', [
+            'anak_nomor' => $anak->nomor,
+            'bulan' => 0,
+            'berat' => 3.2,
+            'tinggi' => 50,
         ]);
     }
 
-    public function test_record_growth_sets_bulan_0_on_first_measurement()
+    public function test_record_growth_starts_at_bulan_1_when_birth_measurement_exists()
     {
         $anak = $this->service->registerChild([
             'nama' => 'Anak A',
@@ -61,13 +63,13 @@ class PertumbuhanAnakTest extends TestCase
             'tinggi' => 60,
         ]);
 
-        $this->assertEquals(0, $pengukuran->bulan);
+        $this->assertEquals(1, $pengukuran->bulan);
         $this->assertEquals(5.0, $pengukuran->berat);
         $this->assertEquals(60, $pengukuran->tinggi);
         $this->assertEquals($anak->nomor, $pengukuran->anak_nomor);
         $this->assertDatabaseHas('pengukurans', [
             'anak_nomor' => $anak->nomor,
-            'bulan' => 0,
+            'bulan' => 1,
             'berat' => 5.0,
             'tinggi' => 60,
         ]);
@@ -87,8 +89,8 @@ class PertumbuhanAnakTest extends TestCase
         $second = $this->service->recordGrowth($anak, ['berat' => 6.0, 'tinggi' => 65]);
         $third = $this->service->recordGrowth($anak, ['berat' => 7.0, 'tinggi' => 70]);
 
-        $this->assertEquals(1, $second->bulan);
-        $this->assertEquals(2, $third->bulan);
+        $this->assertEquals(2, $second->bulan);
+        $this->assertEquals(3, $third->bulan);
     }
 
     public function test_record_growth_is_scoped_per_anak()
@@ -131,10 +133,11 @@ class PertumbuhanAnakTest extends TestCase
 
         $history = $this->service->growthHistory($anak);
 
-        $this->assertCount(3, $history);
+        $this->assertCount(4, $history);
         $this->assertEquals(0, $history[0]->bulan);
         $this->assertEquals(1, $history[1]->bulan);
         $this->assertEquals(2, $history[2]->bulan);
+        $this->assertEquals(3, $history[3]->bulan);
     }
 
     public function test_growth_history_is_scoped_to_anak()
@@ -160,8 +163,8 @@ class PertumbuhanAnakTest extends TestCase
         $historyA = $this->service->growthHistory($anakA);
         $historyB = $this->service->growthHistory($anakB);
 
-        $this->assertCount(1, $historyA);
-        $this->assertCount(1, $historyB);
+        $this->assertCount(2, $historyA);
+        $this->assertCount(2, $historyB);
         $this->assertEquals($anakA->nomor, $historyA[0]->anak_nomor);
         $this->assertEquals($anakB->nomor, $historyB[0]->anak_nomor);
     }
@@ -178,14 +181,12 @@ class PertumbuhanAnakTest extends TestCase
 
         $result = $this->service->updateChild($anak->nomor, [
             'nama' => 'Anak A Updated',
-            'berat_lahir' => 3.5,
         ]);
 
         $this->assertTrue($result);
         $this->assertDatabaseHas('anaks', [
             'nomor' => $anak->nomor,
             'nama' => 'Anak A Updated',
-            'berat_lahir' => 3.5,
         ]);
     }
 
@@ -249,5 +250,23 @@ class PertumbuhanAnakTest extends TestCase
         $this->assertTrue($result);
         $this->assertDatabaseMissing('pengukurans', ['id' => $first->id]);
         $this->assertDatabaseHas('pengukurans', ['id' => $second->id]);
+    }
+
+    public function test_cannot_remove_birth_measurement()
+    {
+        $anak = $this->service->registerChild([
+            'nama' => 'Anak A',
+            'gender' => 'Laki-laki',
+            'tanggal_lahir' => '2024-01-01',
+            'berat_lahir' => 3.2,
+            'tinggi_lahir' => 50,
+        ]);
+
+        $birth = $anak->pengukurans()->where('bulan', 0)->first();
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Cannot remove birth measurement');
+
+        $this->service->removeMeasurement($birth->id);
     }
 }

@@ -88,14 +88,38 @@ class DetailAnakTest extends TestCase
         $response->assertNotFound();
     }
 
+    public function test_register_child_creates_birth_measurement_via_http()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(route('anak.store'), [
+            'nama' => 'Anak A',
+            'gender' => 'Laki-laki',
+            'tanggal_lahir' => '2024-06-01',
+            'berat_lahir' => 3.5,
+            'tinggi_lahir' => 51,
+        ]);
+
+        $response->assertRedirect(route('home'));
+        $response->assertSessionHas('success');
+        $this->assertDatabaseHas('anaks', [
+            'nama' => 'Anak A',
+            'gender' => 'Laki-laki',
+            'tanggal_lahir' => '2024-06-01',
+        ]);
+        $this->assertDatabaseHas('pengukurans', [
+            'bulan' => 0,
+            'berat' => 3.5,
+            'tinggi' => 51,
+        ]);
+    }
+
     private function createAnak(string $nama): Anak
     {
         return Anak::create([
             'nama' => $nama,
             'gender' => 'Laki-laki',
             'tanggal_lahir' => '2024-01-01',
-            'berat_lahir' => 3.2,
-            'tinggi_lahir' => 50,
         ]);
     }
 }

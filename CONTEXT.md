@@ -9,11 +9,11 @@ A child being monitored in the system.
 _Avoid_: Child (English), bayi, balita
 
 **Pengukuran**:
-A single monthly reading for one Anak, recording weight (berat) and height (tinggi) at a given month number. Each Pengukuran belongs to exactly one Anak.
+A single monthly reading for one Anak, recording weight (berat) and height (tinggi) at a given month number. `bulan = 0` represents birth data (berat_lahir / tinggi_lahir). Each Pengukuran belongs to exactly one Anak.
 _Avoid_: DetailAnak, ChildDetail, MeasurementDetail
 
 **PertumbuhanAnak**:
-The consolidated concept spanning a child's registration, their monthly growth measurements (weight & height), and the computed growth history. Covers what the codebase currently splits into `Anak` (the child record) and `DetailAnak` / `Pengukuran` (individual monthly measurements). Age is a computed property — derived from birth date + current date, never stored.
+The consolidated concept spanning a child's registration, their monthly growth measurements (weight & height), and the computed growth history. Registration creates both the Anak record and the birth Pengukuran (bulan = 0) in a single operation. Age is a computed property — derived from birth date + current date, never stored.
 _Avoid_: GrowthRecord, ChildDetail, AnakDetail
 
 ## Example dialogue

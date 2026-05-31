@@ -18,7 +18,7 @@ class Anak extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        'nama', 'gender', 'tanggal_lahir', 'berat_lahir', 'tinggi_lahir'
+        'nama', 'gender', 'tanggal_lahir',
     ];
 
     protected function umur(): Attribute

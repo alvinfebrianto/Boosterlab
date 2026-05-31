@@ -18,9 +18,7 @@ class CreateAnaksTable extends Migration
             $table->string('nama');
             $table->string('gender');
             $table->date('tanggal_lahir');
-            $table->string('umur');
-            $table->decimal('berat_lahir', 5, 2);
-            $table->decimal('tinggi_lahir', 5, 2);
+
             $table->timestamps();
         });
     }

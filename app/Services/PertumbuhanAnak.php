@@ -5,12 +5,25 @@ namespace App\Services;
 use App\Models\Anak;
 use App\Models\Pengukuran;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 
 class PertumbuhanAnak
 {
     public function registerChild(array $data): Anak
     {
-        return Anak::create($data);
+        $beratLahir = $data['berat_lahir'] ?? null;
+        $tinggiLahir = $data['tinggi_lahir'] ?? null;
+
+        $anakData = Arr::except($data, ['berat_lahir', 'tinggi_lahir']);
+        $anak = Anak::create($anakData);
+
+        $anak->pengukurans()->create([
+            'bulan' => 0,
+            'berat' => $beratLahir,
+            'tinggi' => $tinggiLahir,
+        ]);
+
+        return $anak;
     }
 
     public function recordGrowth(Anak $anak, array $data): Pengukuran
@@ -53,6 +66,11 @@ class PertumbuhanAnak
     public function removeMeasurement(int $id): bool
     {
         $pengukuran = Pengukuran::findOrFail($id);
+
+        if ($pengukuran->bulan === 0) {
+            throw new \InvalidArgumentException('Cannot remove birth measurement');
+        }
+
         return (bool) $pengukuran->delete();
     }
 }

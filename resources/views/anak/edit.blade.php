@@ -121,28 +121,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="row mb-4" style="display: none;">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Berat Lahir (Kg)</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control @error('berat_lahir') is-invalid @enderror" name="berat_lahir" required value="{{ isset($anak) ? $anak->berat_lahir : old('berat_lahir') }}">
-                                        @error('berat_lahir')
-                                            <div class="alert alert-danger mt-2">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-5" style="display: none;">
-                                    <label class="col-sm-2 col-form-label font-weight-bold">Tinggi Lahir (Cm)</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control @error('tinggi_lahir') is-invalid @enderror" name="tinggi_lahir" required value="{{ isset($anak) ? $anak->tinggi_lahir : old('tinggi_lahir') }}">
-                                        @error('tinggi_lahir')
-                                            <div class="alert alert-danger mt-2">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
+
                                 <button type="submit" class="btn btn-md btn-primary">Simpan</button>
                             </form> 
                         </div>

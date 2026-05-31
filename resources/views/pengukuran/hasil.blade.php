@@ -74,8 +74,8 @@
                                 <li class="list-group-item" style="font-size: 16px;">Nama Anak: {{ $anak->nama }}</li>
                                 <li class="list-group-item" style="font-size: 16px;">Jenis Kelamin: {{ $anak->gender }}</li>
                                 <li class="list-group-item" style="font-size: 16px;">Umur: {{ $anak->umur }}</li>
-                                <li class="list-group-item" style="font-size: 16px;">Berat: {{ rtrim(rtrim($anak->berat_lahir, '0'), '.') }} Kg</li>
-                                <li class="list-group-item" style="font-size: 16px;">Tinggi: {{ rtrim(rtrim($anak->tinggi_lahir, '0'), '.') }} Cm</li>
+                                <li class="list-group-item" style="font-size: 16px;">Berat: {{ rtrim(rtrim($pengukuran0->berat ?? 0, '0'), '.') }} Kg</li>
+                                <li class="list-group-item" style="font-size: 16px;">Tinggi: {{ rtrim(rtrim($pengukuran0->tinggi ?? 0, '0'), '.') }} Cm</li>
                             </ul>
                             <h4 class="card-title mt-4"><strong>Imunisasi</strong></h4>
                             <ul class="list-group">

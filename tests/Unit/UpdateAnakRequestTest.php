@@ -8,12 +8,16 @@ use Tests\TestCase;
 
 class UpdateAnakRequestTest extends TestCase
 {
-    public function test_rules_match_store_anak_request()
+    public function test_rules_contain_editable_fields_only()
     {
-        $storeRequest = new StoreAnakRequest();
-        $updateRequest = new UpdateAnakRequest();
+        $request = new UpdateAnakRequest();
+        $rules = $request->rules();
 
-        $this->assertEquals($storeRequest->rules(), $updateRequest->rules());
+        $this->assertArrayHasKey('nama', $rules);
+        $this->assertArrayHasKey('gender', $rules);
+        $this->assertArrayHasKey('tanggal_lahir', $rules);
+        $this->assertArrayNotHasKey('berat_lahir', $rules);
+        $this->assertArrayNotHasKey('tinggi_lahir', $rules);
     }
 
     public function test_authorize_returns_true()
