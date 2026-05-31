@@ -19,22 +19,22 @@ class DetailAnakTest extends TestCase
 
         $anak->pengukurans()->create([
             'bulan' => 0,
-            'berat' => 10,
-            'tinggi' => 80,
+            'berat' => 10.5,
+            'tinggi' => 80.5,
         ]);
         $otherAnak->pengukurans()->create([
             'bulan' => 0,
-            'berat' => 20,
-            'tinggi' => 100,
+            'berat' => 20.5,
+            'tinggi' => 100.5,
         ]);
 
         $response = $this->actingAs($user)->get(route('pengukuran.index', $anak));
 
         $response->assertOk();
-        $response->assertSee('10 Kg');
-        $response->assertSee('80 Cm');
-        $response->assertDontSee('20 Kg');
-        $response->assertDontSee('100 Cm');
+        $response->assertSee('10.5 Kg');
+        $response->assertSee('80.5 Cm');
+        $response->assertDontSee('20.5 Kg');
+        $response->assertDontSee('100.5 Cm');
     }
 
     public function test_next_bulan_is_calculated_per_anak()
@@ -45,13 +45,13 @@ class DetailAnakTest extends TestCase
 
         $anak->pengukurans()->create([
             'bulan' => 0,
-            'berat' => 10,
-            'tinggi' => 80,
+            'berat' => 10.5,
+            'tinggi' => 80.5,
         ]);
         $otherAnak->pengukurans()->create([
             'bulan' => 7,
-            'berat' => 20,
-            'tinggi' => 100,
+            'berat' => 20.5,
+            'tinggi' => 100.5,
         ]);
 
         $response = $this->actingAs($user)->post(route('pengukuran.store', $anak), [
@@ -76,8 +76,8 @@ class DetailAnakTest extends TestCase
         $otherAnak = $this->createAnak('Anak B');
         $pengukuran = $anak->pengukurans()->create([
             'bulan' => 0,
-            'berat' => 10,
-            'tinggi' => 80,
+            'berat' => 10.5,
+            'tinggi' => 80.5,
         ]);
 
         $response = $this->actingAs($user)->get(route('pengukuran.edit', [
