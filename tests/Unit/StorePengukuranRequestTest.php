@@ -40,4 +40,5 @@ class StorePengukuranRequestTest extends TestCase
 
         $this->assertTrue($request->authorize());
     }
+
 }

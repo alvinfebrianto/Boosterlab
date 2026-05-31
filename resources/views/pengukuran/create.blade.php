@@ -108,5 +108,18 @@
             </div>
         </div>
     </div>
+    <script>
+        document.querySelectorAll('input[name="berat"], input[name="tinggi"]').forEach(function(input) {
+            input.addEventListener('keydown', function(e) {
+                if (e.key === ',') {
+                    e.preventDefault();
+                    var start = this.selectionStart;
+                    var end = this.selectionEnd;
+                    this.value = this.value.substring(0, start) + '.' + this.value.substring(end);
+                    this.selectionStart = this.selectionEnd = start + 1;
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -174,6 +174,18 @@
             // Mengatur nilai umur pada input hidden dengan id 'umur_hidden'
             document.getElementById('umur_hidden').value = umur;
         });
+
+        document.querySelectorAll('input[name="berat_lahir"], input[name="tinggi_lahir"]').forEach(function(input) {
+            input.addEventListener('keydown', function(e) {
+                if (e.key === ',') {
+                    e.preventDefault();
+                    var start = this.selectionStart;
+                    var end = this.selectionEnd;
+                    this.value = this.value.substring(0, start) + '.' + this.value.substring(end);
+                    this.selectionStart = this.selectionEnd = start + 1;
+                }
+            });
+        });
     </script>
 </body>
 </html>

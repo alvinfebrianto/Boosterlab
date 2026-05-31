@@ -11,6 +11,14 @@ class StoreAnakRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'berat_lahir' => str_replace(',', '.', (string) $this->input('berat_lahir')),
+            'tinggi_lahir' => str_replace(',', '.', (string) $this->input('tinggi_lahir')),
+        ]);
+    }
+
     public function rules(): array
     {
         return [

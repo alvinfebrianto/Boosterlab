@@ -11,6 +11,14 @@ class UpdatePengukuranRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'berat' => str_replace(',', '.', (string) $this->input('berat')),
+            'tinggi' => str_replace(',', '.', (string) $this->input('tinggi')),
+        ]);
+    }
+
     public function rules(): array
     {
         return [
